@@ -15,6 +15,16 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G11.png',
         'img/4_enemie_boss_chicken/2_alert/G12.png',
     ]
+    IMAGES_ATTACK = [
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G14.png',
+        'img/4_enemie_boss_chicken/3_attack/G15.png',
+        'img/4_enemie_boss_chicken/3_attack/G16.png',
+        'img/4_enemie_boss_chicken/3_attack/G17.png',
+        'img/4_enemie_boss_chicken/3_attack/G18.png',
+        'img/4_enemie_boss_chicken/3_attack/G19.png',
+        'img/4_enemie_boss_chicken/3_attack/G20.png',
+    ]
     width = 230;
     height = 263.5
     position_x = 5000;
@@ -26,15 +36,23 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_ATTACK);
         this.animate();
     }
 
 
     /**
-    * Mit dieser Funktion wird die Hühnchen animiert. Die einzelnen Bilder werden in einer Endlosschleife angezeigt
+    * Mit dieser Funktion wird der Endboss animiert. Die einzelnen Bilder werden in einer Endlosschleife angezeigt
     */
     animate() {
-        this.moveEndbossAnimate();
+        setInterval(() => {
+            if (this.position_x > 4700) {
+                this.moveEndbossAnimate();
+            } else {
+                this.alertEndbossAnimation();
+            }
+        }, 250);
         this.movePositionEndboss();
     }
 
@@ -46,27 +64,26 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (this.walk) {
                 this.position_x -= this.speed;
-                this.otherDirection = false;
-            } else {
-                this.position_x += this.speed;
-                this.otherDirection = true;
             }
-            if (this.position_x < 4700) {
+            if (this.position_x < 4690) {
                 this.walk = false;
-            }
-            if (this.position_x > 5000) {
-                this.walk = true;
             }
         }, 1000 / 60);
     }
 
 
     /**
-     * Mit dieser Funktion wird die bewegunsanimation vom Endboss
+     * Mit dieser Funktion wird die bewegunsanimation vom Endboss ausgeführt
      */
     moveEndbossAnimate() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 250);
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird die alertanimation vom Endboss erst dann ausgeführt, wenn er eine bestimmte position_x erreicht hat
+     */
+    alertEndbossAnimation() {
+        this.playAnimation(this.IMAGES_ALERT);
     }
 }

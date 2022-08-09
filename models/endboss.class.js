@@ -43,7 +43,7 @@ class Endboss extends MovableObject {
 
 
     /**
-    * Mit dieser Funktion wird der Endboss animiert. Die einzelnen Bilder werden in einer Endlosschleife angezeigt
+    * Mit dieser Funktion wird der Endboss animiert.
     */
     animate() {
         setInterval(() => {

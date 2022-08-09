@@ -52,7 +52,7 @@ class Character extends MovableObject {
         this.movePositionCharacter();
         this.walkAnimateCharacter();
         this.idelAnimationCharacter();
-
+        this.longIdleAnimationCharacter();
     }
 
 
@@ -95,7 +95,8 @@ class Character extends MovableObject {
 
 
     longIdleAnimationCharacter() {
-        let lastMove = this.world.keyboard.lastMove -= new Date().getTime();
+        debugger;
+        let lastMove = this.world.keyboard.lastMove - new Date().getTime();
         if(lastMove > 3) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
         }

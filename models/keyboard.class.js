@@ -5,5 +5,5 @@ class Keyboard {
     DOWN = false;
     SPACE = false;
     D = false;
-    lastMove = 0;
+    lastMove;
 }

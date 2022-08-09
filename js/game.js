@@ -16,15 +16,19 @@ function init() {
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 37) {
         keyboard.LEFT = true;
+        keyboard.lastMove = new Date().getTime();
     }
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
+        keyboard.lastMove = new Date().getTime();
     }
     if (e.keyCode == 40) {
         keyboard.DOWN = true;
+        keyboard.lastMove = new Date().getTime();
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
+        keyboard.lastMove = new Date().getTime();
     }
 });
 

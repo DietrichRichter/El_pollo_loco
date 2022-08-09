@@ -85,6 +85,10 @@ class Character extends MovableObject {
         }, 150);
     }
 
+
+    /**
+     * Mit dieser Funktion wird eine Animation erst dann ausgeführt, wenn keine tasten gerückt werden
+     */
     idelAnimationCharacter() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT == false && this.world.keyboard.LEFT == false) {
@@ -94,12 +98,18 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Mit dieser Funktion wird eine Animation erst dann ausgeführt, wenn eine bestimmte Zeit lang keine Tasten gedrückt werden
+     */
     longIdleAnimationCharacter() {
-        debugger;
-        let lastMove = this.world.keyboard.lastMove - new Date().getTime();
-        if(lastMove > 3) {
-            this.playAnimation(this.IMAGES_LONG_IDLE);
-        }
+        setInterval(() => {
+            if(this.world.keyboard.RIGHT == false) {
+                let lastMoves = this.world.keyboard.lastMove - new Date().getTime();
+                if (lastMoves < -5000) {
+                    this.playAnimation(this.IMAGES_LONG_IDLE);  
+                }
+            }
+        }, 1000);
     }
 
 

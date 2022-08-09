@@ -62,7 +62,7 @@ class Endboss extends MovableObject {
     /**
      * Mit dieser Funktion wird der Endboss bis zu einem bestimmten Punkt bewegt
      */
-     moveEndbossPosition() {
+    moveEndbossPosition() {
         setInterval(() => {
             if (this.walk) {
                 this.position_x -= this.speed;
@@ -86,7 +86,10 @@ class Endboss extends MovableObject {
      * Mit dieser Funktion wird die alertanimation vom Endboss ausgeführt
      */
     alertEndbossAnimation() {
-        this.playAnimation(this.IMAGES_ALERT);
+        let i = this.currenImage % this.IMAGES_ALERT.length;
+        let path = this.IMAGES_ALERT[i];
+        this.img = this.imageCache[path];
+        this.currenImage++
     }
 
 
@@ -94,7 +97,10 @@ class Endboss extends MovableObject {
      * Mit dieser Funktion wird die attackanimation vom Endboss ausgeführt
      */
     attackEndbossAnimation() {
-        this.playAnimation(this.IMAGES_ATTACK);
+        let i = this.currenImage % this.IMAGES_ATTACK.length;
+        let path = this.IMAGES_ATTACK[i];
+        this.img = this.imageCache[path];
+        this.currenImage++
     }
 
 

@@ -31,6 +31,17 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-19.png',
         'img/2_character_pepe/1_idle/long_idle/I-20.png',
     ];
+    IMAGES_JUMPING = [
+        'img/2_character_pepe/3_jump/J-31.png',
+        'img/2_character_pepe/3_jump/J-32.png',
+        'img/2_character_pepe/3_jump/J-33.png',
+        'img/2_character_pepe/3_jump/J-34.png',
+        'img/2_character_pepe/3_jump/J-35.png',
+        'img/2_character_pepe/3_jump/J-36.png',
+        'img/2_character_pepe/3_jump/J-37.png',
+        'img/2_character_pepe/3_jump/J-38.png',
+        'img/2_character_pepe/3_jump/J-39.png',
+    ]
     position_y = 190;
     world;
     speed = 20;
@@ -38,9 +49,11 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-        this.loadImages(this.IMAGES_WALKING)
-        this.loadImages(this.IMAGES_IDLE)
-        this.loadImages(this.IMAGES_LONG_IDLE)
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
+        this.loadImages(this.IMAGES_JUMPING);
+        this.applyGravitiy();
         this.animate();
     }
 
@@ -62,12 +75,15 @@ class Character extends MovableObject {
     movePositionCharacter() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
-                this.position_x += this.speed;
+                this.moveRight();
                 this.otherDirection = false;
             }
             if (this.world.keyboard.LEFT && this.position_x > 0) {
-                this.position_x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
+            }
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
             }
             this.world.camera_x = -this.position_x + 50;
         }, 1000 / 60);
@@ -79,8 +95,12 @@ class Character extends MovableObject {
      */
     walkAnimateCharacter() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMPING);
+            } else {
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                    this.playAnimation(this.IMAGES_WALKING);
+                }
             }
         }, 150);
     }
@@ -103,20 +123,12 @@ class Character extends MovableObject {
      */
     longIdleAnimationCharacter() {
         setInterval(() => {
-            if(this.world.keyboard.RIGHT == false) {
+            if (this.world.keyboard.RIGHT == false) {
                 let lastMoves = this.world.keyboard.lastMove - new Date().getTime();
                 if (lastMoves < -5000) {
-                    this.playAnimation(this.IMAGES_LONG_IDLE);  
+                    this.playAnimation(this.IMAGES_LONG_IDLE);
                 }
             }
         }, 1000);
-    }
-
-
-    /**
-     * Mit dieser Funktion wird der Befehl Springen ausgeführt
-     */
-    jump() {
-
     }
 }

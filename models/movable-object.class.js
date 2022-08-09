@@ -8,6 +8,30 @@ class MovableObject {
     imageCache = {};
     currenImage = 0;
     otherDirection = false;
+    speedY = 0;
+    acceleration = 2;
+
+
+    /**
+     * Mit dieser Funktion fällt ein Objekt auf den Boden
+     */
+    applyGravitiy() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.position_y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25);
+    }
+
+
+    /**
+     * Diese Funktion gibt die Y Koordinaten zurück 
+     * @returns Y Koordinaten
+     */
+    isAboveGround() {
+        return this.position_y < 190;
+    }
 
 
     /**
@@ -37,19 +61,15 @@ class MovableObject {
      * Mit dieser Funktion bewegt sich ein Objekt nach rechts
      */
     moveRight() {
-        setInterval(() => {
-            this.position_x += this.speed;
-        }, 1000 / 60);
+        this.position_x += this.speed;
     }
 
-    
+
     /**
      * Mit dieser Funktion bewegt sich ein Objekt nach links
      */
     moveLeft() {
-        setInterval(() => {
-            this.position_x -= this.speed;
-        }, 1000 / 60);
+        this.position_x -= this.speed;
     }
 
 
@@ -62,5 +82,10 @@ class MovableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currenImage++
+    }
+
+
+    jump() {
+        this.speedY = 28;
     }
 }

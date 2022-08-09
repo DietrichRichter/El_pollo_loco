@@ -47,20 +47,22 @@ class Endboss extends MovableObject {
     */
     animate() {
         setInterval(() => {
-            if (this.position_x > 4700) {
+            if (this.positionOfCaracter() > 4500) {
+                this.attackEndbossAnimation();
+            } else if (this.positionOfEndboss() > 4700) {
                 this.moveEndbossAnimate();
             } else {
                 this.alertEndbossAnimation();
             }
         }, 250);
-        this.movePositionEndboss();
+        this.moveEndbossPosition();
     }
 
 
     /**
-     * Mit dieser Funktion wird der Endboss bis zu einem bestimmten Punkt bewegt und wieder zurück
+     * Mit dieser Funktion wird der Endboss bis zu einem bestimmten Punkt bewegt
      */
-    movePositionEndboss() {
+     moveEndbossPosition() {
         setInterval(() => {
             if (this.walk) {
                 this.position_x -= this.speed;
@@ -81,9 +83,35 @@ class Endboss extends MovableObject {
 
 
     /**
-     * Mit dieser Funktion wird die alertanimation vom Endboss erst dann ausgeführt, wenn er eine bestimmte position_x erreicht hat
+     * Mit dieser Funktion wird die alertanimation vom Endboss ausgeführt
      */
     alertEndbossAnimation() {
         this.playAnimation(this.IMAGES_ALERT);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird die attackanimation vom Endboss ausgeführt
+     */
+    attackEndbossAnimation() {
+        this.playAnimation(this.IMAGES_ATTACK);
+    }
+
+
+    /**
+     * Die Position von dem Character wird zurückgegeben
+     * @returns position_x
+     */
+    positionOfCaracter() {
+        return this.world.character.position_x
+    }
+
+
+    /**
+     * Die Position von dem Endboss wird zurückgegeben
+     * @returns position_x
+     */
+    positionOfEndboss() {
+        return this.position_x
     }
 }

@@ -13,6 +13,39 @@ class MovableObject {
 
 
     /**
+     * Mit dieser Funktion wird ein Objekt gezeichnet
+     * @param {*} ctx gibt den canvas an
+     */
+    draw(ctx) {
+        ctx.drawImage(this.img, this.position_x, this.position_y, this.width, this.height);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein Rand um jedes Objekt gelegt
+     * @param {*} ctx gibt den canvas an
+     */
+    drawFrame(ctx) {
+        if (this.instanceOfObjects()) {
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(this.position_x, this.position_y, this.width, this.height);
+        ctx.stroke();
+        }
+    }
+
+
+    /**
+     * Diese Funktion gibt alle Objekte zuück, die umrandet werden sollen
+     * @returns Objekte
+     */
+    instanceOfObjects () {
+        return this instanceof Character || this instanceof BottleGround || this instanceof Coin || this instanceof Endboss || this instanceof NormalChicken || this instanceof SmallChicken
+    }
+
+
+    /**
      * Mit dieser Funktion fällt ein Objekt auf den Boden
      */
     applyGravitiy() {

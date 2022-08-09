@@ -16,7 +16,7 @@ class World {
         this.setWorld();
     }
 
-    
+
     /**
     * Mit dieser Funktion wird der Charakter durch das this mit der Welt verbunden
     */
@@ -69,15 +69,35 @@ class World {
      */
     addToMap(movableObject) {
         if (movableObject.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(movableObject.width, 0);
-            this.ctx.scale(-1, 1);
-            movableObject.position_x = movableObject.position_x * -1;
+            this.flipImage(movableObject);
         }
-        this.ctx.drawImage(movableObject.img, movableObject.position_x, movableObject.position_y, movableObject.width, movableObject.height);
+
+        movableObject.draw(this.ctx);
+        movableObject.drawFrame(this.ctx);
+
         if (movableObject.otherDirection) {
-            movableObject.position_x = movableObject.position_x * -1;
-            this.ctx.restore();
+            this.flipImageBack(movableObject);
         }
+    }
+
+    /**
+     * Mit dieser Funktion wird das Objekt gedreht
+     * @param {*} movableObject gibt es an die Funktion addToMap weiter
+     */
+    flipImage(movableObject) {
+        this.ctx.save();
+        this.ctx.translate(movableObject.width, 0);
+        this.ctx.scale(-1, 1);
+        movableObject.position_x = movableObject.position_x * -1;
+    }
+
+
+    /**
+     * Mit dieser Funktion wird das Objekt zurück gedreht
+     * @param {*} movableObject gibt es an die Funktion addToMap weiter
+     */
+    flipImageBack(movableObject) {
+        movableObject.position_x = movableObject.position_x * -1;
+        this.ctx.restore();
     }
 }

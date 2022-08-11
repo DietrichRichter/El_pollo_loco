@@ -29,14 +29,19 @@ class World {
                 }
             })
             this.level.coins.forEach((coin) => {
-                if (this.character.isCollidionWithCoins(coin)) {
+                if (this.character.isCollidingWithCoins(coin)) {
                     console.log(coin);
+                }
+            })
+            this.level.bottleGround.forEach((bottle) => {
+                if (this.character.isCollidingWithBottles(bottle)) {
+                    console.log(bottle);
                 }
             })
         }, 200);
     }
 
-    
+
     /**
     * Mit dieser Funktion wird der Charakter durch das this mit der Welt verbunden
     */
@@ -93,10 +98,10 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
-        movableObject.drawFrameCharacter(this.ctx);
-        movableObject.drawFrameCoin(this.ctx);
-        movableObject.drawFrameBottleGround(this.ctx);
+        //movableObject.drawFrameObjects(this.ctx);
+        //movableObject.drawFrameCharacter(this.ctx);
+        //movableObject.drawFrameCoin(this.ctx);
+        //movableObject.drawFrameBottleGround(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

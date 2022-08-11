@@ -25,7 +25,7 @@ class MovableObject {
      * Mit dieser Funktion wird ein Rand um jedes Objekt gelegt
      * @param {*} ctx gibt den canvas an
      */
-    drawFrame(ctx) {
+    drawFrameObjects(ctx) {
         if (this.instanceOfObjects()) {
             ctx.beginPath();
             ctx.lineWidth = '5';
@@ -33,6 +33,15 @@ class MovableObject {
             ctx.rect(this.position_x, this.position_y, this.width, this.height);
             ctx.stroke();
         }
+    }
+
+
+    /**
+     * Diese Funktion gibt alle Objekte zuück, die umrandet werden sollen
+     * @returns Objekte
+     */
+    instanceOfObjects() {
+        return this instanceof Endboss || this instanceof NormalChicken || this instanceof SmallChicken || this instanceof Coin || this instanceof BottleGround || this instanceof Character
     }
 
 
@@ -99,7 +108,7 @@ class MovableObject {
      * @param {*} movableObject gibt es in die MovableObject klasse weiter
      * @returns gibt die Eckpunkte von dem Objekt zurück
      */
-    isCollidionWithCoins(movableObject) {
+    isCollidingWithCoins(movableObject) {
         return this.position_x - 7 + this.width - 70 > movableObject.position_x &&
             this.position_y + 50 + this.height > movableObject.position_y &&
             this.position_x - 70 < movableObject.position_x &&
@@ -108,11 +117,28 @@ class MovableObject {
 
 
     /**
-     * Diese Funktion gibt alle Objekte zuück, die umrandet werden sollen
-     * @returns Objekte
+     * Mit dieser Funktion werden von den Bottles die Eckpunkte angegeben
+     * @param {*} movableObject gibt es in die MovableObject klasse weiter
+     * @returns gibt die Eckpunkte von dem Objekt zurück
      */
-    instanceOfObjects() {
-        return this instanceof Endboss || this instanceof NormalChicken || this instanceof SmallChicken
+    isCollidingWithBottles (movableObject) {
+        return this.position_x + 35 + this.width - 80 > movableObject.position_x &&
+            this.position_y + 50 + this.height - 50 > movableObject.position_y &&
+            this.position_x < movableObject.position_x + 20 &&
+            this.position_y + 50 < movableObject.position_y + movableObject.height;
+    }
+
+
+    /**
+     * Mit dieser Funktion werden von dem Endboss die Eckpunkte angegeben
+     * @param {*} movableObject gibt es in die MovableObject klasse weiter
+     * @returns gibt die Eckpunkte von dem Objekt zurück
+     */
+    isCollidingWithEndboss (movableObject) {
+        return this.position_x + 35 + this.width - 80 > movableObject.position_x &&
+        this.position_y + 50 + this.height - 50 > movableObject.position_y &&
+        this.position_x < movableObject.position_x + 20 &&
+        this.position_y + 50 < movableObject.position_y + movableObject.height;
     }
 
 

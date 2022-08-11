@@ -14,9 +14,29 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollision();
     }
 
 
+    /**
+     * Mit dieser Funktion wird überprüft, ob Objekte mit einander Kollidieren
+     */
+    checkCollision() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isCollidingWithCharacter(enemy)) {
+                    console.log (enemy);
+                }
+            })
+            this.level.coins.forEach((coin) => {
+                if (this.character.isCollidionWithCoins(coin)) {
+                    console.log(coin);
+                }
+            })
+        }, 200);
+    }
+
+    
     /**
     * Mit dieser Funktion wird der Charakter durch das this mit der Welt verbunden
     */
@@ -74,6 +94,9 @@ class World {
 
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
+        movableObject.drawFrameCharacter(this.ctx);
+        movableObject.drawFrameCoin(this.ctx);
+        movableObject.drawFrameBottleGround(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

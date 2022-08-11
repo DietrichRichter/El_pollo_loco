@@ -47,7 +47,7 @@ class Endboss extends MovableObject {
     */
     animate() {
         setInterval(() => {
-            if (this.positionOfCaracter() > 4300) {
+            if (this.positionOfCaracter() > 4100) {
                 this.attackEndbossAnimation();
             } else if (this.positionOfEndboss() > 4500) {
                 this.moveEndbossAnimate();

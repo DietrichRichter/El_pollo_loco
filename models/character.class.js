@@ -44,7 +44,7 @@ class Character extends MovableObject {
     ]
     position_y = 190;
     world;
-    speed = 20;
+    speed = 2;
 
 
     constructor() {

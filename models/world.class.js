@@ -5,7 +5,6 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    endboss = new Endboss();
 
 
     constructor(canvas, keyboard) {
@@ -38,6 +37,11 @@ class World {
                     console.log(bottle);
                 }
             })
+            this.level.endboss.forEach((boss) => {
+                if (this.character.isCollidingWithEndboss(boss)) {
+                    console.log(boss);
+                }
+            })
         }, 200);
     }
 
@@ -47,7 +51,6 @@ class World {
     */
     setWorld() {
         this.character.world = this;
-        this.endboss.world = this;
     }
 
 
@@ -61,8 +64,8 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
-        this.addToMap(this.endboss);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottleGround);
         this.addObjectsToMap(this.level.cloud);
@@ -98,8 +101,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        //movableObject.drawFrameObjects(this.ctx);
-        //movableObject.drawFrameCharacter(this.ctx);
+        movableObject.drawFrameObjects(this.ctx);
+        movableObject.drawFrameCharacter(this.ctx);
         //movableObject.drawFrameCoin(this.ctx);
         //movableObject.drawFrameBottleGround(this.ctx);
 

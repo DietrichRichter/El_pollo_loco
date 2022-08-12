@@ -135,9 +135,9 @@ class MovableObject {
      * @returns gibt die Eckpunkte von dem Objekt zurück
      */
     isCollidingWithEndboss (movableObject) {
-        return this.position_x + 35 + this.width - 80 > movableObject.position_x &&
+        return this.position_x + 35 + this.width - 70 > movableObject.position_x &&
         this.position_y + 50 + this.height - 50 > movableObject.position_y &&
-        this.position_x < movableObject.position_x + 20 &&
+        this.position_x < movableObject.position_x + 200 &&
         this.position_y + 50 < movableObject.position_y + movableObject.height;
     }
 

@@ -47,9 +47,7 @@ class Endboss extends MovableObject {
     */
     animate() {
         setInterval(() => {
-            if (this.positionOfCaracter() > 4100) {
-                this.attackEndbossAnimation();
-            } else if (this.positionOfEndboss() > 4500) {
+            if (this.positionOfEndboss() > 4500) {
                 this.moveEndbossAnimate();
             } else {
                 this.alertEndbossAnimation();
@@ -101,15 +99,6 @@ class Endboss extends MovableObject {
         let path = this.IMAGES_ATTACK[i];
         this.img = this.imageCache[path];
         this.currenImage++
-    }
-
-
-    /**
-     * Die Position von dem Character wird zurückgegeben
-     * @returns position_x
-     */
-    positionOfCaracter() {
-        return this.world.character.position_x
     }
 
 

@@ -5,7 +5,10 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusBarHealth = new StatusBarHealth();
+    statusBarCoin = new StatusBarCoin();
+    statusBarBottle = new StatusBarBottle();
+    StatusBarEndboss = new StatusBarEndboss();
 
 
     constructor(canvas, keyboard) {
@@ -26,25 +29,25 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isCollidingWithCharacter(enemy)) {
                     this.character.hit();
-                    console.log (this.character.energy);
+                    this.statusBarHealth.setPercentageHealth(this.character.energy);
                 }
             })
             this.level.coins.forEach((coin) => {
                 if (this.character.isCollidingWithCoins(coin)) {
                     this.character.collectCoins();
-                    console.log(this.character.coinCollect);
+                    this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
                 }
             })
             this.level.bottleGround.forEach((bottle) => {
                 if (this.character.isCollidingWithBottles(bottle)) {
                     this.character.collectBottles();
-                    console.log(this.character.bottleCollect);
+                    this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
                 }
             })
             this.level.endboss.forEach((boss) => {
                 if (this.character.isCollidingWithEndboss(boss)) {
                     this.character.hit();
-                    console.log (this.character.energy);
+                    this.statusBarHealth.setPercentageHealth(this.character.energy);
                 }
             })
         }, 200);
@@ -68,7 +71,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.statusBar);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.StatusBarEndboss);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);

@@ -123,7 +123,7 @@ class MovableObject extends DrawableObject {
      * Mit dieser Funktion werden Coins eingesammelt
      */
     collectCoins() {
-        this.coinCollect += 5;
+        this.coinCollect += 4.17;
         if (this.coinCollect > 100) {
             this.coinCollect = 100;
         }

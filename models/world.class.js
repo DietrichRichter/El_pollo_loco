@@ -5,6 +5,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
 
 
     constructor(canvas, keyboard) {
@@ -24,22 +25,26 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isCollidingWithCharacter(enemy)) {
-                    console.log (enemy);
+                    this.character.hit();
+                    console.log (this.character.energy);
                 }
             })
             this.level.coins.forEach((coin) => {
                 if (this.character.isCollidingWithCoins(coin)) {
-                    console.log(coin);
+                    this.character.collectCoins();
+                    console.log(this.character.coinCollect);
                 }
             })
             this.level.bottleGround.forEach((bottle) => {
                 if (this.character.isCollidingWithBottles(bottle)) {
-                    console.log(bottle);
+                    this.character.collectBottles();
+                    console.log(this.character.bottleCollect);
                 }
             })
             this.level.endboss.forEach((boss) => {
                 if (this.character.isCollidingWithEndboss(boss)) {
-                    console.log(boss);
+                    this.character.hit();
+                    console.log (this.character.energy);
                 }
             })
         }, 200);
@@ -63,6 +68,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addToMap(this.statusBar);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
@@ -101,8 +107,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrameObjects(this.ctx);
-        movableObject.drawFrameCharacter(this.ctx);
+        //movableObject.drawFrameObjects(this.ctx);
+        //movableObject.drawFrameCharacter(this.ctx);
         //movableObject.drawFrameCoin(this.ctx);
         //movableObject.drawFrameBottleGround(this.ctx);
 

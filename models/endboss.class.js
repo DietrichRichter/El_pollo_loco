@@ -103,6 +103,15 @@ class Endboss extends MovableObject {
 
 
     /**
+     * Die Position von dem Character wird zurückgegeben
+     * @returns position_x
+     */
+    positionOfCaracter() {
+        return this.world.character.position_x
+    }
+
+
+    /**
      * Die Position von dem Endboss wird zurückgegeben
      * @returns position_x
      */
@@ -110,3 +119,8 @@ class Endboss extends MovableObject {
         return this.position_x
     }
 }
+
+
+//if (this.positionOfCaracter() > 4100) {
+//    this.attackEndbossAnimation();
+//} else

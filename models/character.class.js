@@ -42,6 +42,20 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-38.png',
         'img/2_character_pepe/3_jump/J-39.png',
     ]
+    IMAGES_DEAD = [
+        'img/2_character_pepe/5_dead/D-51.png',
+        'img/2_character_pepe/5_dead/D-52.png',
+        'img/2_character_pepe/5_dead/D-53.png',
+        'img/2_character_pepe/5_dead/D-54.png',
+        'img/2_character_pepe/5_dead/D-55.png',
+        'img/2_character_pepe/5_dead/D-56.png',
+        'img/2_character_pepe/5_dead/D-57.png',
+    ]
+    IMAGES_HURT = [
+        'img/2_character_pepe/4_hurt/H-41.png',
+        'img/2_character_pepe/4_hurt/H-42.png',
+        'img/2_character_pepe/4_hurt/H-43.png',
+    ]
     position_y = 190;
     world;
     speed = 20;
@@ -53,6 +67,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
         this.applyGravitiy();
         this.animate();
     }
@@ -95,7 +111,11 @@ class Character extends MovableObject {
      */
     walkAnimateCharacter() {
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -111,7 +131,7 @@ class Character extends MovableObject {
      */
     idelAnimationCharacter() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT == false && this.world.keyboard.LEFT == false) {
+            if (this.world.keyboard.RIGHT == false && this.world.keyboard.LEFT == false && this.energy > 1) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 1000);
@@ -123,7 +143,7 @@ class Character extends MovableObject {
      */
     longIdleAnimationCharacter() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT == false) {
+            if (this.world.keyboard.RIGHT == false && this.energy > 1) {
                 let lastMoves = this.world.keyboard.lastMove - new Date().getTime();
                 if (lastMoves < -5000) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);

@@ -75,8 +75,8 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
+        this.showBossEnergy();
         this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.StatusBarEndboss);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
@@ -91,6 +91,16 @@ class World {
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+
+
+    /**
+     * Mit dieser Funktion wird die Statusbar erst ab einer bestimmten x Koordinaten angezeigt
+     */
+    showBossEnergy() {
+        if(this.character.position_x > 4000) {
+            this.addToMap(this.StatusBarEndboss);
+        }
     }
 
 

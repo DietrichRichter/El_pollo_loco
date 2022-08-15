@@ -14,10 +14,10 @@ class StatusBarEndboss extends DrawableObject {
         super();
         this.loadImages(this.IMAGES_HEALTH);
         this.setPercentageHealth(100);
-        this.position_x = 4500;
+        this.position_x = 460;
         this.position_y = 0;
-        this.width = 200;
-        this.height = 60;
+        this.width = 250;
+        this.height = 90;
         this.otherDirection = true;
     }
 

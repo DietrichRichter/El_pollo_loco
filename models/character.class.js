@@ -71,6 +71,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.applyGravitiy();
         this.animate();
+        this.endbossAttack();
     }
 
 
@@ -150,5 +151,17 @@ class Character extends MovableObject {
                 }
             }
         }, 1000);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird endbossAttack auf true gesetzt, um die animation von dem Endboss auszuführen
+     */
+    endbossAttack() {
+       setInterval(() => {
+        if (this.position_x > 4100) {
+            this.endbossAttak = true;
+        }
+       }, 100);
     }
 }

@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     coinCollect = 0;
     bottleCollect = 0;
     lastHit = 0;
+    endbossAttak = false;
 
 
     /**
@@ -133,7 +134,7 @@ class MovableObject extends DrawableObject {
      * Mit dieser Funktion werden Bottles eingesammelt
      */
     collectBottles() {
-        this.bottleCollect += 5;
+        this.bottleCollect += 12.5;
         if (this.bottleCollect > 100) {
             this.bottleCollect = 100;
         }

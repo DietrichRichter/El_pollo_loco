@@ -80,7 +80,11 @@ class MovableObject extends DrawableObject {
      * @returns Y Koordinaten
      */
     isAboveGround() {
-        return this.position_y < 190;
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.position_y < 190;
+        }
     }
 
 

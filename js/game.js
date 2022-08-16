@@ -30,6 +30,10 @@ window.addEventListener('keydown', (e) => {
         keyboard.SPACE = true;
         keyboard.lastMove = new Date().getTime();
     }
+    if (e.keyCode == 68) {
+        keyboard.D = true;
+        keyboard.lastMove = new Date().getTime();
+    }
 });
 
 /**
@@ -50,6 +54,10 @@ window.addEventListener('keyup', (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
+        keyboard.lastMove = new Date().getTime();
+    }
+    if (e.keyCode == 68) {
+        keyboard.D = false;
         keyboard.lastMove = new Date().getTime();
     }
 });

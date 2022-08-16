@@ -9,6 +9,7 @@ class World {
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
     StatusBarEndboss = new StatusBarEndboss();
+    throwableObjects = [];
 
 
     constructor(canvas, keyboard) {
@@ -17,7 +18,29 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollision();
+        this.run();
+    }
+
+
+    /**
+     * Mit dieser Funktion werden andere Funktionen gestartet
+     */
+    run() {
+        setInterval(() => {
+            this.checkCollision();
+            this.checkThrowObjects();
+        }, 200);
+    }
+
+
+    /**
+     * Mit dieser funktion wird die Flasche erst dann geworfen, wenn man eine bestimmte Taste drückt
+     */
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.position_x + 100, this.character.position_y + 100);
+            this.throwableObjects.push(bottle);
+        }
     }
 
 
@@ -78,6 +101,7 @@ class World {
         this.showBossEnergy();
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.coins);
@@ -98,7 +122,7 @@ class World {
      * Mit dieser Funktion wird die Statusbar erst ab einer bestimmten x Koordinaten angezeigt
      */
     showBossEnergy() {
-        if(this.character.position_x > 4000) {
+        if (this.character.position_x > 4000) {
             this.addToMap(this.StatusBarEndboss);
         }
     }

@@ -18,18 +18,8 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run();
-    }
-
-
-    /**
-     * Mit dieser Funktion werden andere Funktionen gestartet
-     */
-    run() {
-        setInterval(() => {
-            this.checkCollision();
-            this.checkThrowObjects();
-        }, 200);
+        this.checkThrowObjects();
+        this.checkCollision();
     }
 
 
@@ -37,10 +27,12 @@ class World {
      * Mit dieser funktion wird die Flasche erst dann geworfen, wenn man eine bestimmte Taste drückt
      */
     checkThrowObjects() {
-        if (this.keyboard.D) {
-            let bottle = new ThrowableObject(this.character.position_x + 100, this.character.position_y + 100);
-            this.throwableObjects.push(bottle);
-        }
+        setInterval(() => {
+            if (this.keyboard.D) {
+                let bottle = new ThrowableObject(this.character.position_x + 100, this.character.position_y + 100);
+                this.throwableObjects.push(bottle);
+            }
+        }, 200);
     }
 
 
@@ -49,31 +41,63 @@ class World {
      */
     checkCollision() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isCollidingWithCharacter(enemy)) {
-                    this.character.hit();
-                    this.statusBarHealth.setPercentageHealth(this.character.energy);
-                }
-            })
-            this.level.coins.forEach((coin) => {
-                if (this.character.isCollidingWithCoins(coin)) {
-                    this.character.collectCoins();
-                    this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
-                }
-            })
-            this.level.bottleGround.forEach((bottle) => {
-                if (this.character.isCollidingWithBottles(bottle)) {
-                    this.character.collectBottles();
-                    this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
-                }
-            })
-            this.level.endboss.forEach((boss) => {
-                if (this.character.isCollidingWithEndboss(boss)) {
-                    this.character.hit();
-                    this.statusBarHealth.setPercentageHealth(this.character.energy);
-                }
-            })
+            this.collisionWithEnemies();
+            this.collisionWithCoin();
+            this.collisionWithBottle();
+            this.collisionWithEndboss();
         }, 200);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird überprüft, ob der Charakter mit den Hähnchen Koolidiert
+     */
+    collisionWithEnemies() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isCollidingWithCharacter(enemy)) {
+                this.character.hit();
+                this.statusBarHealth.setPercentageHealth(this.character.energy);
+            }
+        })
+    }
+
+
+    /**
+     * Mit dieser Funktion wird überprüft, ob der Charakter mit den Coiins Koolidiert
+     */
+    collisionWithCoin() {
+        this.level.coins.forEach((coin) => {
+            if (this.character.isCollidingWithCoins(coin)) {
+                this.character.collectCoins();
+                this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
+            }
+        })
+    }
+
+
+    /**
+     * Mit dieser Funktion wird überprüft, ob der Charakter mit den Flaschen Koolidiert
+     */
+    collisionWithBottle() {
+        this.level.bottleGround.forEach((bottle) => {
+            if (this.character.isCollidingWithBottles(bottle)) {
+                this.character.collectBottles();
+                this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
+            }
+        })
+    }
+
+
+    /**
+     * Mit dieser Funktion wird überprüft, ob der Charakter mit dem Endboss Koolidiert
+     */
+    collisionWithEndboss() {
+        this.level.endboss.forEach((boss) => {
+            if (this.character.isCollidingWithEndboss(boss)) {
+                this.character.hit();
+                this.statusBarHealth.setPercentageHealth(this.character.energy);
+            }
+        })
     }
 
 

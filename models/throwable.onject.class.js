@@ -32,7 +32,7 @@ class ThrowableObject extends MovableObject {
 
 
     /**
-     * Mit dieser Funktion wird eine Flasche geworfen und die Flugbahn wird berechnet
+     * Mit dieser Funktion wird eine Flasche geworfen und die Flugbahn berechnet
      */
     trow() {
         this.speedY = 25;

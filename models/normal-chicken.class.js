@@ -21,7 +21,7 @@ class NormalChicken extends MovableObject {
         this.animate();
     }
 
-    
+
     /**
     * Mit dieser Funktion wird die Hühnchen animiert. Die einzelnen Bilder werden in einer Endlosschleife angezeigt
     */
@@ -29,7 +29,7 @@ class NormalChicken extends MovableObject {
         setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
-        
+
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);

@@ -60,7 +60,7 @@ class DrawableObject {
      * @returns Objekte
      */
     instanceOfObjects() {
-        return this instanceof Endboss || this instanceof NormalChicken || this instanceof SmallChicken || this instanceof Coin || this instanceof BottleGround || this instanceof Character
+        return this instanceof Endboss || this instanceof NormalChicken || this instanceof SmallChicken || this instanceof Coin || this instanceof BottleGround || this instanceof Character || this instanceof ThrowableObject
     }
 
 

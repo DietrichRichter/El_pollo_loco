@@ -29,7 +29,7 @@ class World {
     checkThrowObjects() {
         setInterval(() => {
             if (this.keyboard.D) {
-                let bottle = new ThrowableObject(this.character.position_x + 100, this.character.position_y + 100);
+                let bottle = new ThrowableObject(this.character.position_x + 20, this.character.position_y + 100);
                 this.throwableObjects.push(bottle);
             }
         }, 200);

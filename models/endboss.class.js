@@ -29,7 +29,7 @@ class Endboss extends MovableObject {
     height = 263.5
     position_x = 5000;
     position_y = 175;
-    speed = 0.20;
+    speed = 22.20;
     world;
     walk = true;
 
@@ -47,11 +47,13 @@ class Endboss extends MovableObject {
     */
     animate() {
         setInterval(() => {
-            if (this.endbossAttak = true) {
+            if (this.enbossAttackZone = true) {
                 this.attackEndbossAnimation();
-            } else if (this.positionOfEndboss() > 4500) {
+            }
+            if (this.positionOfEndboss() > 4500) {
                 this.moveEndbossAnimate();
-            } else {
+            }
+            if (this.positionOfEndboss() < 4500) {
                 this.alertEndbossAnimation();
             }
         }, 250);
@@ -105,24 +107,10 @@ class Endboss extends MovableObject {
 
 
     /**
-     * Die Position von dem Character wird zurückgegeben
-     * @returns position_x
-     */
-    positionOfCaracter() {
-        return this.world.character.position_x
-    }
-
-
-    /**
      * Die Position von dem Endboss wird zurückgegeben
      * @returns position_x
      */
     positionOfEndboss() {
-        return this.position_x
+        this.position_x
     }
 }
-
-
-//if (this.positionOfCaracter() > 4100) {
-//    this.attackEndbossAnimation();
-//} else

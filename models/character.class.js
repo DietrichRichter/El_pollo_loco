@@ -58,7 +58,7 @@ class Character extends MovableObject {
     ]
     position_y = 190;
     world;
-    speed = 2;
+    speed = 20;
 
 
     constructor() {
@@ -160,7 +160,9 @@ class Character extends MovableObject {
     endbossAttack() {
        setInterval(() => {
         if (this.position_x > 4100) {
-            this.endbossAttak = true;
+            this.enbossAttackZone = true;
+        } else {
+            this.enbossAttackZone = false;
         }
        }, 100);
     }

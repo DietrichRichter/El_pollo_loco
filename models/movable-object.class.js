@@ -7,7 +7,7 @@ class MovableObject extends DrawableObject {
     coinCollect = 0;
     bottleCollect = 0;
     lastHit = 0;
-    endbossAttak = false;
+    enbossAttackZone;
 
 
     /**

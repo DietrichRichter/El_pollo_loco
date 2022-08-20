@@ -138,7 +138,18 @@ class MovableObject extends DrawableObject {
      * Mit dieser Funktion werden Bottles eingesammelt
      */
     collectBottles() {
-        this.bottleCollect += 12.5;
+        this.bottleCollect += 21;
+        if (this.bottleCollect > 100) {
+            this.bottleCollect = 100;
+        }
+    }
+
+
+    /**
+     * Mit dieser Funktion werden die eingesammelten Bottels aus dem bottleCollect subtrahiert
+     */
+    thrownCollectBottles() {
+        this.bottleCollect -= 19.9;
         if (this.bottleCollect > 100) {
             this.bottleCollect = 100;
         }

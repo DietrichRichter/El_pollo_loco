@@ -28,11 +28,13 @@ class World {
      */
     checkThrowObjects() {
         setInterval(() => {
-            if (this.keyboard.D) {
+            if (this.keyboard.D && this.character.bottleCollect > 1) {
                 let bottle = new ThrowableObject(this.character.position_x + 20, this.character.position_y + 100);
                 this.throwableObjects.push(bottle);
+                this.character.thrownCollectBottles();
+                this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
             }
-        }, 200);
+        }, 90);
     }
 
 
@@ -45,7 +47,7 @@ class World {
             this.collisionWithCoin();
             this.collisionWithBottle();
             this.collisionWithEndboss();
-        }, 200);
+        }, 10);
     }
 
 
@@ -70,6 +72,7 @@ class World {
             if (this.character.isCollidingWithCoins(coin)) {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
+                this.deleteTheCoin(coin);
             }
         })
     }
@@ -83,6 +86,7 @@ class World {
             if (this.character.isCollidingWithBottles(bottle)) {
                 this.character.collectBottles();
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
+                this.deleteTheBottle(bottle);
             }
         })
     }
@@ -98,6 +102,30 @@ class World {
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
         })
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein Coin aus dem Array gelöscht
+     * @param {*} coin Das ist der Coin, der vom Charakter berührt wird
+     */
+    deleteTheCoin(coin) {
+        let index = this.level.coins.indexOf(coin);
+        if (index < 1) {
+            this.level.coins.splice(0, 1);
+        }
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein bottle aus dem Array gelöscht
+     * @param {*} bottle Das ist die Flasche die vom Character berührt wird
+     */
+    deleteTheBottle(bottle) {
+        let index = this.level.bottleGround.indexOf(bottle);
+        if (index < 1) {
+            this.level.bottleGround.splice(0, 1);
+        }
     }
 
 
@@ -182,6 +210,7 @@ class World {
             this.flipImageBack(movableObject);
         }
     }
+
 
     /**
      * Mit dieser Funktion wird das Objekt gedreht

@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2;
     energy = 100;
+    endbossEnergy = 100;
     coinCollect = 0;
     bottleCollect = 0;
     lastHit = 0;

@@ -34,7 +34,7 @@ class World {
                 this.character.thrownCollectBottles();
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
             }
-        }, 90);
+        }, 100);
     }
 
 
@@ -146,6 +146,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.cloud);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
@@ -158,7 +159,6 @@ class World {
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottleGround);
-        this.addObjectsToMap(this.level.cloud);
 
         this.ctx.translate(-this.camera_x, 0);
 

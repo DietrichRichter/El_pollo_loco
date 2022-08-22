@@ -26,6 +26,8 @@
     <script src="models/throwable.object.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
+    <script src="models/game-over-screen.class.js"></script>
+    <script src="models/startscreen.class.js"></script>
     <script src="js/game.js"></script>
 </head>
 
@@ -33,7 +35,13 @@
 
     <h1>El pollo loco</h1>
 
-    <canvas id="canvas" width="720" height="480"></canvas>
+    <div class="canvas-container">
+        <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+    <div id="replay-button-container" class="replay-button-container d-none">
+        <button class="replay-button">Replay</button>
+    </div>
+   
 </body>
 
 </html>

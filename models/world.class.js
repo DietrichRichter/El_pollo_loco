@@ -10,6 +10,9 @@ class World {
     statusBarBottle = new StatusBarBottle();
     StatusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
+    gameOverScreen = new GameOver();
+    startscreen = new Startscreen();
+    addStartscreen = true;
 
 
     constructor(canvas, keyboard) {
@@ -44,9 +47,11 @@ class World {
     checkCollision() {
         setInterval(() => {
             this.collisionWithEnemies();
+            this.collisionWithEndboss();
+        }, 200);
+        setInterval(() => {
             this.collisionWithCoin();
             this.collisionWithBottle();
-            this.collisionWithEndboss();
         }, 10);
     }
 
@@ -147,18 +152,23 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.cloud);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBarHealth);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
-        this.showBossEnergy();
-        this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottleGround);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        this.showGameOverScreen();
+        this.showBossEnergy();
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObjects);
+
+        this.ctx.translate(-this.camera_x, 0);
+        this.showStartscreen();
+        this.ctx.translate(this.camera_x, 0);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -176,6 +186,19 @@ class World {
     showBossEnergy() {
         if (this.character.position_x > 4000) {
             this.addToMap(this.StatusBarEndboss);
+        }
+    }
+
+    showStartscreen() {
+        if(this.addStartscreen == true) {
+            this.addToMap(this.startscreen);
+        }
+    }
+
+    showGameOverScreen() {
+        if (this.character.energy == 0 && this.addStartscreen == false) {
+            this.addToMap(this.gameOverScreen);
+            document.getElementById('replay-button-container').classList.remove('d-none');
         }
     }
 

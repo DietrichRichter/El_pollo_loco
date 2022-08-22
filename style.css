@@ -4,6 +4,31 @@ body {
     align-items: center;
 }
 
+.d-none {
+    display: none;
+}
+
 canvas {
     background-color: black;
+}
+
+.canvas-container {
+    z-index: 1;
+}
+
+.replay-button-container {
+    position: absolute;
+    top: 54%;
+    z-index: 2;
+}
+
+.replay-button {
+    height: 40px;
+    width: 90px;
+    color: yellow;
+    border: 0;
+    border-radius: 3px;
+    background-color: red;
+    cursor: pointer;
+    font-size: 24px;
 }

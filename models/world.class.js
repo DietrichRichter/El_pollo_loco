@@ -160,14 +160,14 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        this.showGameOverScreen();
+        //this.showGameOverScreen();
         this.showBossEnergy();
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
-        this.showStartscreen();
+        //this.showStartscreen();
         this.ctx.translate(this.camera_x, 0);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -189,12 +189,24 @@ class World {
         }
     }
 
+
+    /***
+     * Diese Funktion wird beim Starten des Spieles ausgeführt
+     */
     showStartscreen() {
         if(this.addStartscreen == true) {
             this.addToMap(this.startscreen);
         }
     }
 
+    startGame() {
+        this.addStartscreen = false;
+    }
+
+
+    /**
+     * Diese Funktion wird ausgeführt, wenn der Character stirbt
+     */
     showGameOverScreen() {
         if (this.character.energy == 0 && this.addStartscreen == false) {
             this.addToMap(this.gameOverScreen);

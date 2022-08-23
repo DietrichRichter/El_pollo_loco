@@ -32,3 +32,20 @@ canvas {
     cursor: pointer;
     font-size: 24px;
 }
+
+.start-game-container {
+    position: absolute;
+    top: 41%;
+    z-index: 2;
+}
+
+.start-game-button {
+    height: 65px;
+    width: 125px;
+    color: yellow;
+    border: 0;
+    border-radius: 3px;
+    background-color: red;
+    cursor: pointer;
+    font-size: 24px;
+}

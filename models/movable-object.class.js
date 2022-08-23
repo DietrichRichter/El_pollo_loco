@@ -63,6 +63,14 @@ class MovableObject extends DrawableObject {
     }
 
 
+    isCollidingThrowableObjectWithEndboss(movableObject) {
+        return this.position_x + this.width > movableObject.position_x &&
+            this.position_y + this.height > movableObject.position_y &&
+            this.position_x < movableObject.position_x &&
+            this.position_y < movableObject.position_y + movableObject.height;
+    }
+
+
     /**
      * Mit dieser Funktion fällt ein Objekt auf den Boden
      */

@@ -73,11 +73,11 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit den Coiins Koolidiert
      */
     collisionWithCoin() {
-        this.level.coins.forEach((coin) => {
+        this.level.coins.forEach((coin, index) => {
             if (this.character.isCollidingWithCoins(coin)) {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
-                this.deleteTheCoin(coin);
+                this.deleteTheCoin(index);
             }
         })
     }
@@ -87,11 +87,11 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit den Flaschen Koolidiert
      */
     collisionWithBottle() {
-        this.level.bottleGround.forEach((bottle) => {
+        this.level.bottleGround.forEach((bottle, index) => {
             if (this.character.isCollidingWithBottles(bottle)) {
                 this.character.collectBottles();
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
-                this.deleteTheBottle(bottle);
+                this.deleteTheBottle(index);
             }
         })
     }
@@ -106,6 +106,9 @@ class World {
                 this.character.hit();
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
+            this.throwableObjects.forEach((to) => {
+                console.log(boss.isCollidingWithEndboss(to));
+            })
         })
     }
 
@@ -114,11 +117,8 @@ class World {
      * Mit dieser Funktion wird ein Coin aus dem Array gelöscht
      * @param {*} coin Das ist der Coin, der vom Charakter berührt wird
      */
-    deleteTheCoin(coin) {
-        let index = this.level.coins.indexOf(coin);
-        if (index < 1) {
-            this.level.coins.splice(0, 1);
-        }
+    deleteTheCoin(index) {
+        this.level.coins.splice(index, 1);
     }
 
 
@@ -126,11 +126,8 @@ class World {
      * Mit dieser Funktion wird ein bottle aus dem Array gelöscht
      * @param {*} bottle Das ist die Flasche die vom Character berührt wird
      */
-    deleteTheBottle(bottle) {
-        let index = this.level.bottleGround.indexOf(bottle);
-        if (index < 1) {
-            this.level.bottleGround.splice(0, 1);
-        }
+    deleteTheBottle(index) {
+        this.level.bottleGround.splice(index, 1);
     }
 
 
@@ -194,7 +191,7 @@ class World {
      * Diese Funktion wird beim Starten des Spieles ausgeführt
      */
     showStartscreen() {
-        if(this.addStartscreen == true) {
+        if (this.addStartscreen == true) {
             this.addToMap(this.startscreen);
         }
     }

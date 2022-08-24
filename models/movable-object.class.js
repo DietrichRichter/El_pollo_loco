@@ -9,65 +9,19 @@ class MovableObject extends DrawableObject {
     bottleCollect = 0;
     lastHit = 0;
     enbossAttackZone;
-
-
-    /**
-     * Mit dieser Funktion werden von dem Charakter die Eckpunkte angegeben
-     * @param {*} movableObject gibt es in die MovableObject klasse weiter
-     * @returns gibt die Eckpunkte von dem Objekt zurück
-     */
-    isCollidingWithCharacter(movableObject) {
-        return this.position_x + 35 + this.width - 70 > movableObject.position_x &&
-            this.position_y + 50 + this.height - 50 > movableObject.position_y &&
-            this.position_x < movableObject.position_x + 35 &&
-            this.position_y + 50 < movableObject.position_y + movableObject.height;
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
     }
 
 
-    /**
-     * Mit dieser Funktion werden von den Coins die Eckpunkte angegeben
-     * @param {*} movableObject gibt es in die MovableObject klasse weiter
-     * @returns gibt die Eckpunkte von dem Objekt zurück
-     */
-    isCollidingWithCoins(movableObject) {
-        return this.position_x - 7 + this.width - 70 > movableObject.position_x &&
-            this.position_y + 50 + this.height > movableObject.position_y &&
-            this.position_x - 70 < movableObject.position_x &&
-            this.position_y + 50 < movableObject.position_y + movableObject.height - 110;
-    }
-
-
-    /**
-     * Mit dieser Funktion werden von den Bottles die Eckpunkte angegeben
-     * @param {*} movableObject gibt es in die MovableObject klasse weiter
-     * @returns gibt die Eckpunkte von dem Objekt zurück
-     */
-    isCollidingWithBottles(movableObject) {
-        return this.position_x + 35 + this.width - 80 > movableObject.position_x &&
-            this.position_y + 50 + this.height - 50 > movableObject.position_y &&
-            this.position_x < movableObject.position_x + 20 &&
-            this.position_y + 50 < movableObject.position_y + movableObject.height;
-    }
-
-
-    /**
-     * Mit dieser Funktion werden von dem Endboss die Eckpunkte angegeben
-     * @param {*} movableObject gibt es in die MovableObject klasse weiter
-     * @returns gibt die Eckpunkte von dem Objekt zurück
-     */
-    isCollidingWithEndboss(movableObject) {
-        return this.position_x + 35 + this.width - 70 > movableObject.position_x &&
-            this.position_y + 50 + this.height - 50 > movableObject.position_y &&
-            this.position_x < movableObject.position_x + 200 &&
-            this.position_y + 50 < movableObject.position_y + movableObject.height;
-    }
-
-
-    isCollidingThrowableObjectWithEndboss(movableObject) {
-        return this.position_x + this.width > movableObject.position_x &&
-            this.position_y + this.height > movableObject.position_y &&
-            this.position_x < movableObject.position_x &&
-            this.position_y < movableObject.position_y + movableObject.height;
+    isColliding(movableObject) {
+        return this.position_x + this.width - this.offset.right > movableObject.position_x + this.offset.left &&
+            this.position_y + this.height - this.offset.bottom > movableObject.position_y + this.offset.top &&
+            this.position_x + this.offset.left < movableObject.position_x + movableObject.width - movableObject.offset.right &&
+            this.position_y + this.offset.top < movableObject.position_y + movableObject.height - movableObject.offset.bottom;
     }
 
 

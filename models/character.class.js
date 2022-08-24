@@ -58,7 +58,13 @@ class Character extends MovableObject {
     ]
     position_y = 190;
     world;
-    speed = 20;
+    speed = 5;
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 
 
     constructor() {

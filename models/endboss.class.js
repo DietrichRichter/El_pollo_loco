@@ -32,6 +32,12 @@ class Endboss extends MovableObject {
     speed = 22.20;
     world;
     walk = true;
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);

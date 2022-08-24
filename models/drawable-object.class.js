@@ -65,7 +65,7 @@ class DrawableObject {
 
 
     /**
-    * Mit dieser Funktion wird ein Rand um jedes Objekt gelegt
+    * Mit dieser Funktion wird ein roter kleiner Rand um den Character gezeichnet
     * @param {*} ctx gibt den canvas an
     */
     drawFrameCharacter(ctx) {
@@ -73,7 +73,37 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.position_x + 35, this.position_y + 120, this.width - 70, this.height - 120);
+            ctx.rect(this.position_x + 35, this.position_y + 110, this.width - 80, this.height - 120);
+            ctx.stroke();
+        }
+    }
+
+
+    /**
+    * Mit dieser Funktion wird ein roter rand um den normalen Chicken gezeichnet
+    * @param {*} ctx gibt den canvas an
+    */
+    drawFrameNormalChicken(ctx) {
+        if (this instanceof NormalChicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.position_x + 5, this.position_y + 7, this.width - 15, this.height - 15);
+            ctx.stroke();
+        }
+    }
+
+
+    /**
+   * Mit dieser Funktion wird ein roter rand um den small Chicken gezeichnet
+   * @param {*} ctx gibt den canvas an
+   */
+    drawFrameSmallChicken(ctx) {
+        if (this instanceof SmallChicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.position_x + 10, this.position_y + 10, this.width - 20, this.height - 20);
             ctx.stroke();
         }
     }
@@ -88,7 +118,7 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.position_x + 50, this.position_y + 50, this.width - 100, this.height - 100);
+            ctx.rect(this.position_x + 60, this.position_y + 60, this.width - 120, this.height - 120);
             ctx.stroke();
         }
     }
@@ -103,7 +133,22 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.position_x + 15, this.position_y + 10, this.width - 30, this.height - 20);
+            ctx.rect(this.position_x + 25, this.position_y + 10, this.width - 40, this.height - 20);
+            ctx.stroke();
+        }
+    }
+
+
+    /**
+    * Mit dieser Funktion wird der Boss rot umrandet
+    * @param {*} ctx gibt den Canvas an
+    */
+    drawFrameEndboss(ctx) {
+        if (this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.position_x + 25, this.position_y + 30, this.width - 40, this.height - 50);
             ctx.stroke();
         }
     }

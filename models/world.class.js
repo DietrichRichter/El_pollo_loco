@@ -48,7 +48,7 @@ class World {
         setInterval(() => {
             this.collisionWithEnemies();
             this.collisionWithEndboss();
-        }, 200);
+        }, 1000);
         setInterval(() => {
             this.collisionWithCoin();
             this.collisionWithBottle();
@@ -61,8 +61,9 @@ class World {
      */
     collisionWithEnemies() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingWithCharacter(enemy)) {
+            if (this.character.isColliding(enemy)) {
                 this.character.hit();
+                console.log(enemy);
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
         })
@@ -74,7 +75,7 @@ class World {
      */
     collisionWithCoin() {
         this.level.coins.forEach((coin, index) => {
-            if (this.character.isCollidingWithCoins(coin)) {
+            if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
                 this.deleteTheCoin(index);
@@ -88,7 +89,7 @@ class World {
      */
     collisionWithBottle() {
         this.level.bottleGround.forEach((bottle, index) => {
-            if (this.character.isCollidingWithBottles(bottle)) {
+            if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
                 this.deleteTheBottle(index);
@@ -102,12 +103,12 @@ class World {
      */
     collisionWithEndboss() {
         this.level.endboss.forEach((boss) => {
-            if (this.character.isCollidingWithEndboss(boss)) {
+            if (this.character.isColliding(boss)) {
                 this.character.hit();
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
             this.throwableObjects.forEach((to) => {
-                console.log(boss.isCollidingWithEndboss(to));
+                boss.isColliding(to)
             })
         })
     }
@@ -136,6 +137,7 @@ class World {
     */
     setWorld() {
         this.character.world = this;
+        this.level.endboss.world = this;
     }
 
 
@@ -233,10 +235,13 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        //movableObject.drawFrameObjects(this.ctx);
-        //movableObject.drawFrameCharacter(this.ctx);
-        //movableObject.drawFrameCoin(this.ctx);
-        //movableObject.drawFrameBottleGround(this.ctx);
+        movableObject.drawFrameObjects(this.ctx);
+        movableObject.drawFrameNormalChicken(this.ctx);
+        movableObject.drawFrameSmallChicken(this.ctx);
+        movableObject.drawFrameEndboss(this.ctx);
+        movableObject.drawFrameCharacter(this.ctx);
+        movableObject.drawFrameCoin(this.ctx);
+        movableObject.drawFrameBottleGround(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

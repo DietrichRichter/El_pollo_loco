@@ -1,14 +1,16 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intervallIds = new IntervallIds();
 
 /**
  * Diese Funktion wird nachdem das HTML geladen wurde, ausgeführt
  */
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, intervallIds);
 }
+
 
 /**
  * Mit dieser Funktion wird erkannt, wann eine Taste gedrückt wird

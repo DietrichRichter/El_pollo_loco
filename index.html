@@ -22,6 +22,7 @@
     <script src="models/cloud.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/keyboard.class.js"></script>
+    <script src="models/intervall-ids.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/throwable.object.class.js"></script>
     <script src="models/endboss.class.js"></script>
@@ -39,10 +40,9 @@
         <canvas id="canvas" width="720" height="480"></canvas>
     </div>
     <div id="replay-button-container" class="replay-button-container d-none">
-        <button class="replay-button">Replay</button>
+        <button onclick="replayGame()" class="replay-button">Replay</button>
     </div>
     <div id="start-game-container" class="start-game-container d-none">
-        <button onclick="startGame()" class="start-game-button">Start Game</button>
     </div>
    
 </body>

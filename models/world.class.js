@@ -4,6 +4,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    intervallIds;
     camera_x = 0;
     statusBarHealth = new StatusBarHealth();
     statusBarCoin = new StatusBarCoin();
@@ -15,10 +16,11 @@ class World {
     addStartscreen = true;
 
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, intervallIds) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.intervallIds = intervallIds;
         this.draw();
         this.setWorld();
         this.checkThrowObjects();
@@ -137,7 +139,6 @@ class World {
     */
     setWorld() {
         this.character.world = this;
-        this.level.endboss.world = this;
     }
 
 
@@ -159,7 +160,7 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        //this.showGameOverScreen();
+        this.showGameOverScreen();
         this.showBossEnergy();
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
@@ -207,7 +208,7 @@ class World {
      * Diese Funktion wird ausgeführt, wenn der Character stirbt
      */
     showGameOverScreen() {
-        if (this.character.energy == 0 && this.addStartscreen == false) {
+        if (this.character.energy == 0) {
             this.addToMap(this.gameOverScreen);
             document.getElementById('replay-button-container').classList.remove('d-none');
         }
@@ -235,7 +236,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrameObjects(this.ctx);
+        //movableObject.drawFrameObjects(this.ctx);
         movableObject.drawFrameNormalChicken(this.ctx);
         movableObject.drawFrameSmallChicken(this.ctx);
         movableObject.drawFrameEndboss(this.ctx);

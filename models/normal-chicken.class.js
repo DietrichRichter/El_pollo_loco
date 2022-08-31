@@ -11,10 +11,10 @@ class NormalChicken extends MovableObject {
     height = 59;
     position_y = 370;
     offset = {
-        top: 8,
-        left: 8,
-        right: 8,
-        bottom: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
     }
 
 
@@ -23,7 +23,7 @@ class NormalChicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
         this.position_x = 300 //200 + Math.random() * 4000;
-        this.speed = 0 //0.15 + Math.random() * 0.35;
+        //this.speed = 0 //0.15 + Math.random() * 0.35;
         this.animate();
     }
 

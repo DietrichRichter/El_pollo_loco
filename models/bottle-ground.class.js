@@ -4,8 +4,8 @@ class BottleGround extends MovableObject {
     position_y = 360;
     offset = {
         top: 0,
-        left: 0,
-        right: 0,
+        left: 20,
+        right: 15,
         bottom: 0,
     }
 

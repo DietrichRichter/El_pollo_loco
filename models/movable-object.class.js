@@ -102,7 +102,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    
+
     /**
      * Mit dieser Funktion werden Bottles eingesammelt
      */
@@ -132,6 +132,15 @@ class MovableObject extends DrawableObject {
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    hitEndboss() {
+        this.endbossEnergy -= 5;
+        if (this.endbossEnergy < 0) {
+            this.endbossEnergy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }

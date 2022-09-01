@@ -46,6 +46,7 @@ canvas {
 
 .canvas-container {
     z-index: 1;
+    display: block;
 }
 
 .replay-button-container {

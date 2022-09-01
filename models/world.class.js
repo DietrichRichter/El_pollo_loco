@@ -111,7 +111,10 @@ class World {
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
             this.throwableObjects.forEach((to) => {
-                boss.isColliding(to)
+                if(boss.isColliding(to)) {
+                    this.character.hitEndboss();
+                    this.StatusBarEndboss.setPercentageHealth(this.character.endbossEnergy);
+                }
             })
         })
     }

@@ -8,7 +8,7 @@ let intervallIds = [];
  */
 function init() {
     canvas = document.getElementById('canvas');
-    
+    TouchButtons();
 }
 
 
@@ -102,3 +102,41 @@ window.addEventListener('keyup', (e) => {
         keyboard.lastMove = new Date().getTime();
     }
 });
+
+function TouchButtons() {
+    document.getElementById('button-left').addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        keyboard.LEFT = true;
+    });
+
+    document.getElementById('button-left').addEventListener('touchend', (event) => {
+        keyboard.LEFT = false;
+    });
+
+    document.getElementById('button-right').addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        keyboard.RIGHT = true;
+    });
+
+    document.getElementById('button-right').addEventListener('touchend', (event) => {
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById('button-up').addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        keyboard.SPACE = true;
+    });
+
+    document.getElementById('button-up').addEventListener('touchend', (event) => {
+        keyboard.SPACE = false;
+    });
+
+    document.getElementById('button-throw').addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        keyboard.D = true;
+    });
+
+    document.getElementById('button-throw').addEventListener('touchend', (event) => {
+        keyboard.D = false;
+    });
+}

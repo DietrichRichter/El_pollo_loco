@@ -35,7 +35,7 @@ h1 {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 canvas {
@@ -80,6 +80,26 @@ canvas {
     background-color: red;
     cursor: pointer;
     font-size: 24px;
+}
+
+.touch-icons-main-container {
+    display: flex;
+    width: 720px;
+    justify-content: space-between;
+    z-index: 6;
+    position: absolute;
+    top: 566px;
+}
+
+.touch-icons-main-container img {
+    height: 50px;
+    width: 50px;
+}
+
+.touch-icon-container {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
 }
 
 @media only screen and (max-width: 720px){

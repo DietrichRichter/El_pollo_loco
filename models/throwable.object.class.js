@@ -5,6 +5,14 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ]
+    IMAGES_SPLASH = [
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+    ]
     offset = {
         top: 0,
         left: 0,
@@ -15,6 +23,7 @@ class ThrowableObject extends MovableObject {
     constructor(position_x, position_y) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES);
+        this.loadImages(this.IMAGES_SPLASH);
         this.width = 70;
         this.height = 70;
         this.position_x = position_x;
@@ -42,7 +51,7 @@ class ThrowableObject extends MovableObject {
      * Mit dieser Funktion wird eine Flasche geworfen und die Flugbahn berechnet
      */
     trow() {
-        this.speedY = 25;
+        this.speedY = 20;
         this.applyGravitiy();
         setStoppableInterval(() => {
             this.position_x += 8;

@@ -47,7 +47,7 @@ class World {
         setStoppableInterval(() => {
             this.collisionWithEnemies();
             this.collisionWithEndboss();
-        }, 500);
+        }, 100);
         setStoppableInterval(() => {
             this.collisionWithCoin();
             this.collisionWithBottle();
@@ -65,8 +65,9 @@ class World {
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
             this.throwableObjects.forEach((to) => {
-                enemy.isColliding(to)
-                //this.deleteEnemies(index);
+                if (enemy.isColliding(to)) {
+                    this.deleteEnemies(index);
+                }
             })
         })
     }

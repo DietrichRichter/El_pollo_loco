@@ -52,7 +52,7 @@ class Endboss extends MovableObject {
     * Mit dieser Funktion wird der Endboss animiert.
     */
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.enbossAttackZone = true) {
                 this.attackEndbossAnimation();
             }
@@ -71,7 +71,7 @@ class Endboss extends MovableObject {
      * Mit dieser Funktion wird der Endboss bis zu einem bestimmten Punkt bewegt
      */
     moveEndbossPosition() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.walk) {
                 this.moveLeft();
             }

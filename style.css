@@ -13,6 +13,21 @@ body {
     margin: 0;
 }
 
+.start-screen {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 150px;
+    z-index: 4;
+    height: 100%;
+}
+
+.start-screen img {
+    width: 720px;
+    height: 480px;
+    display: block;
+}
+
 h1 {
     font-size: 64px;
     letter-spacing: 3px;
@@ -26,6 +41,7 @@ h1 {
 canvas {
     background-color: black;
     display: block;
+    cursor: pointer;
 }
 
 .canvas-container {
@@ -52,7 +68,7 @@ canvas {
 .start-game-container {
     position: absolute;
     top: 50%;
-    z-index: 2;
+    z-index: 5;
 }
 
 .start-game-button {

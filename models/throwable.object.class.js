@@ -5,6 +5,13 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ]
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
+    
     constructor(position_x, position_y) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES);
@@ -21,7 +28,7 @@ class ThrowableObject extends MovableObject {
      * Mit dieser Funktion wird eine Animation ausgeführt
      */
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             let i = this.currenImage % this.IMAGES.length;
             let path = this.IMAGES[i];
             this.img = this.imageCache[path];
@@ -37,7 +44,7 @@ class ThrowableObject extends MovableObject {
     trow() {
         this.speedY = 25;
         this.applyGravitiy();
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.position_x += 8;
         }, 25);
     }

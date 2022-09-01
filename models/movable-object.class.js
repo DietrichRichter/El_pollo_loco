@@ -17,6 +17,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Mit dieser Funktion wird herausgefunden, ob Objekte miteinander kollidieren
+     * @param {*} movableObject gibt die bewegten Objekte wieder
+     * @returns gibt die Werte der einzelnen Objekte zurück
+     */
     isColliding(movableObject) {
         return this.position_x + this.width - this.offset.right > movableObject.position_x + movableObject.offset.left &&
             this.position_y + this.height - this.offset.bottom > movableObject.position_y + movableObject.offset.top &&
@@ -29,7 +34,7 @@ class MovableObject extends DrawableObject {
      * Mit dieser Funktion fällt ein Objekt auf den Boden
      */
     applyGravitiy() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.position_y -= this.speedY;
                 this.speedY -= this.acceleration;
@@ -97,6 +102,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    
     /**
      * Mit dieser Funktion werden Bottles eingesammelt
      */

@@ -20,12 +20,21 @@ class StatusBarCoin extends DrawableObject {
     }
 
 
+    /**
+     * Mit dieser Funktion wird herausgefunden, wie viel Prozent die percentageCoin hat und das passende Bild wird geladen
+     * @param {*} percentageCoin gibt den Prozentwert zurück
+     */
     setPercentageCoin(percentageCoin) {
         this.percentageCoin = percentageCoin;
         let path = this.IMAGES_COIN[this.resolveImageIndexCoin()];
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * Mit dieser Funktion werden die einzelnen Bilder anhand der percentageCoin zurückgegeben
+     * @returns das Bild zu den Prozenten wird zurückgegeben 
+     */
     resolveImageIndexCoin() {
         if (this.percentageCoin == 100) {
             return 5

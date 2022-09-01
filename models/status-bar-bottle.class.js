@@ -20,6 +20,11 @@ class StatusBarBottle extends DrawableObject {
         this.height = 60;
     }
 
+
+    /**
+     * Mit dieser Funktion wird herausgefunden, wie viel Prozent die percentageBottle hat und das passende Bild wird geladen
+     * @param {*} percentageBottle gibt den Prozentwert zurück
+     */
     setPercentageBottle(percentageBottle) {
         this.percentageBottle = percentageBottle;
         let path = this.IMAGES_BOTTLE[this.resolveImageIndexBottle()];
@@ -27,6 +32,10 @@ class StatusBarBottle extends DrawableObject {
     }
 
 
+    /**
+     * Mit dieser Funktion werden die einzelnen Bilder anhand der percentageBottle zurückgegeben
+     * @returns das Bild zu den Prozenten wird zurückgegeben 
+     */
     resolveImageIndexBottle() {
         if (this.percentageBottle == 100) {
             return 5

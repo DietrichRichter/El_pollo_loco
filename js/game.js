@@ -1,14 +1,52 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let intervallIds = new IntervallIds();
+let intervallIds = [];
 
 /**
  * Diese Funktion wird nachdem das HTML geladen wurde, ausgeführt
  */
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, intervallIds);
+    
+}
+
+
+/**
+ * Mit dieser Funktion wird das Spiel gestartet und der Startscreen/Button wird entfernt
+ */
+function startGame() {
+    initLevel();
+    world = new World(canvas, keyboard);
+    document.getElementById('start-game-container').classList.add('d-none');
+    document.getElementById('start-screen').classList.add('d-none');
+}
+
+
+/**
+ * Mit dieser Funktion werden die Ids von den Intervalle in ein Array gepusht
+ * @param {*} fn gibt die Funktion von den Intervallen zurück
+ * @param {*} time gibt die Zeit von den Intervallen zurück
+ */
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervallIds.push(id);
+}
+
+
+/**
+ * Mit dieser Funktion werden die Intervalle gestoppt
+ */
+function stopGame() {
+    intervallIds.forEach(clearInterval);
+}
+
+
+/**
+ * Mit dieser Funktion wird der HTML Code neu geladen
+ */
+function restartGame() {
+    window.location.reload();
 }
 
 
@@ -37,6 +75,7 @@ window.addEventListener('keydown', (e) => {
         keyboard.lastMove = new Date().getTime();
     }
 });
+
 
 /**
  * Mit dieser Funktion wird erkannt, wann eine Taste losgelassen wird

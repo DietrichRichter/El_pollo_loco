@@ -4,7 +4,6 @@ class World {
     canvas;
     ctx;
     keyboard;
-    intervallIds;
     camera_x = 0;
     statusBarHealth = new StatusBarHealth();
     statusBarCoin = new StatusBarCoin();
@@ -12,8 +11,6 @@ class World {
     StatusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     gameOverScreen = new GameOver();
-    startscreen = new Startscreen();
-    addStartscreen = true;
 
 
     constructor(canvas, keyboard, intervallIds) {
@@ -32,7 +29,7 @@ class World {
      * Mit dieser funktion wird die Flasche erst dann geworfen, wenn man eine bestimmte Taste drückt
      */
     checkThrowObjects() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.keyboard.D && this.character.bottleCollect > 1) {
                 let bottle = new ThrowableObject(this.character.position_x + 20, this.character.position_y + 100);
                 this.throwableObjects.push(bottle);
@@ -47,11 +44,11 @@ class World {
      * Mit dieser Funktion wird überprüft, ob Objekte mit einander Kollidieren
      */
     checkCollision() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.collisionWithEnemies();
             this.collisionWithEndboss();
-        }, 1000);
-        setInterval(() => {
+        }, 500);
+        setStoppableInterval(() => {
             this.collisionWithCoin();
             this.collisionWithBottle();
         }, 10);
@@ -62,12 +59,15 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit den Hähnchen Koolidiert
      */
     collisionWithEnemies() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                console.log(enemy);
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
+            this.throwableObjects.forEach((to) => {
+                enemy.isColliding(to)
+                //this.deleteEnemies(index);
+            })
         })
     }
 
@@ -127,10 +127,19 @@ class World {
 
     /**
      * Mit dieser Funktion wird ein bottle aus dem Array gelöscht
-     * @param {*} bottle Das ist die Flasche die vom Character berührt wird
+     * @param {*} index Das ist die Flasche die vom Character berührt wird
      */
     deleteTheBottle(index) {
         this.level.bottleGround.splice(index, 1);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein Chicken aus dem Array gelöscht
+     * @param {*} index gibt den Wert von einen chicken zurück
+     */
+    deleteEnemies(index) {
+        this.level.enemies.splice(index, 1);
     }
 
 
@@ -167,10 +176,6 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
-        //this.showStartscreen();
-        this.ctx.translate(this.camera_x, 0);
-
-        this.ctx.translate(-this.camera_x, 0);
 
         // Draw() wird immer wieder aufgerufen
         let self = this;
@@ -190,20 +195,6 @@ class World {
     }
 
 
-    /***
-     * Diese Funktion wird beim Starten des Spieles ausgeführt
-     */
-    showStartscreen() {
-        if (this.addStartscreen == true) {
-            this.addToMap(this.startscreen);
-        }
-    }
-
-    startGame() {
-        this.addStartscreen = false;
-    }
-
-
     /**
      * Diese Funktion wird ausgeführt, wenn der Character stirbt
      */
@@ -211,6 +202,7 @@ class World {
         if (this.character.energy == 0) {
             this.addToMap(this.gameOverScreen);
             document.getElementById('replay-button-container').classList.remove('d-none');
+            stopGame();
         }
     }
 
@@ -237,12 +229,12 @@ class World {
 
         movableObject.draw(this.ctx);
         //movableObject.drawFrameObjects(this.ctx);
-        movableObject.drawFrameNormalChicken(this.ctx);
-        movableObject.drawFrameSmallChicken(this.ctx);
-        movableObject.drawFrameEndboss(this.ctx);
-        movableObject.drawFrameCharacter(this.ctx);
-        movableObject.drawFrameCoin(this.ctx);
-        movableObject.drawFrameBottleGround(this.ctx);
+        //movableObject.drawFrameNormalChicken(this.ctx);
+        //movableObject.drawFrameSmallChicken(this.ctx);
+        //movableObject.drawFrameEndboss(this.ctx);
+        //movableObject.drawFrameCharacter(this.ctx);
+        //movableObject.drawFrameCoin(this.ctx);
+        //movableObject.drawFrameBottleGround(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

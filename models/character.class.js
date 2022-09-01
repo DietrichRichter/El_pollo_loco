@@ -58,7 +58,7 @@ class Character extends MovableObject {
     ]
     position_y = 190;
     world;
-    speed = 2;
+    speed = 20;
     offset = {
         top: 120,
         left: 40,
@@ -96,7 +96,7 @@ class Character extends MovableObject {
      * Mit dieser Funktion wird der Charakter auf dem Canvas bewegt, der Charakter wird beim umdrehen gespiegelt und zeigt die Grenzen auf dem Canvas an
      */
     movePositionCharacter() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -117,7 +117,7 @@ class Character extends MovableObject {
      * Mit dieser Funktion wird die bewegungsanimation vom Charakter angezeigt
      */
     walkAnimateCharacter() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
@@ -137,7 +137,7 @@ class Character extends MovableObject {
      * Mit dieser Funktion wird eine Animation erst dann ausgeführt, wenn keine tasten gerückt werden
      */
     idelAnimationCharacter() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.RIGHT == false && this.world.keyboard.LEFT == false && this.energy > 1) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
@@ -149,7 +149,7 @@ class Character extends MovableObject {
      * Mit dieser Funktion wird eine Animation erst dann ausgeführt, wenn eine bestimmte Zeit lang keine Tasten gedrückt werden
      */
     longIdleAnimationCharacter() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.RIGHT == false && this.energy > 1) {
                 let lastMoves = this.world.keyboard.lastMove - new Date().getTime();
                 if (lastMoves < -5000) {
@@ -164,7 +164,7 @@ class Character extends MovableObject {
      * Mit dieser Funktion wird endbossAttack auf true gesetzt, um die animation von dem Endboss auszuführen
      */
     endbossAttack() {
-       setInterval(() => {
+        setStoppableInterval(() => {
         if (this.position_x > 4100) {
             this.enbossAttackZone = true;
         } else {

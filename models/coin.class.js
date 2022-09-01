@@ -26,7 +26,7 @@ class Coin extends MovableObject {
     * Mit dieser Funktion wird die Hühnchen animiert. Die einzelnen Bilder werden in einer Endlosschleife angezeigt
     */
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             let i = this.currenImage % this.IMAGES.length;
             let path = this.IMAGES[i];
             this.img = this.imageCache[path];

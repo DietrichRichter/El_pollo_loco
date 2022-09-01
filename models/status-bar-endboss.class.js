@@ -22,6 +22,10 @@ class StatusBarEndboss extends DrawableObject {
     }
 
 
+    /**
+     * Mit dieser Funktion wird herausgefunden, wie viel Prozent die percentageHealth hat und das passende Bild wird geladen
+     * @param {*} percentageHealth gibt den Prozentwert zurück
+     */
     setPercentageHealth(percentageHealth) {
         this.percentageHealth = percentageHealth;
         let path = this.IMAGES_HEALTH[this.resolveImageIndexHealth()];
@@ -29,6 +33,10 @@ class StatusBarEndboss extends DrawableObject {
     }
 
 
+    /**
+     * Mit dieser Funktion werden die einzelnen Bilder anhand der percentageHealth zurückgegeben
+     * @returns das Bild zu den Prozenten wird zurückgegeben 
+     */
     resolveImageIndexHealth() {
         if (this.percentageHealth == 100) {
             return 5

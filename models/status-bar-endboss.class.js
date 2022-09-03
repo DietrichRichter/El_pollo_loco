@@ -1,5 +1,5 @@
 class StatusBarEndboss extends DrawableObject {
-    IMAGES_HEALTH = [
+    IMAGES_HEALTH_ENDBOSS = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png',
@@ -12,8 +12,8 @@ class StatusBarEndboss extends DrawableObject {
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_HEALTH);
-        this.setPercentageHealth(100);
+        this.loadImages(this.IMAGES_HEALTH_ENDBOSS);
+        this.setPercentageHealthEndboss(100);
         this.position_x = 460;
         this.position_y = 0;
         this.width = 250;
@@ -26,9 +26,9 @@ class StatusBarEndboss extends DrawableObject {
      * Mit dieser Funktion wird herausgefunden, wie viel Prozent die percentageHealth hat und das passende Bild wird geladen
      * @param {*} percentageHealth gibt den Prozentwert zurück
      */
-    setPercentageHealth(percentageHealth) {
+    setPercentageHealthEndboss(percentageHealth) {
         this.percentageHealth = percentageHealth;
-        let path = this.IMAGES_HEALTH[this.resolveImageIndexHealth()];
+        let path = this.IMAGES_HEALTH_ENDBOSS[this.resolveImageIndexHealth()];
         this.img = this.imageCache[path];
     }
 

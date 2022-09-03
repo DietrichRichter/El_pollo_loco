@@ -11,6 +11,7 @@ class World {
     StatusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     gameOverScreen = new GameOver();
+    lastCollision;
 
 
     constructor(canvas, keyboard, intervallIds) {
@@ -61,11 +62,13 @@ class World {
     collisionWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
+                this.lastCollision = new Date().getTime();
                 this.character.hit();
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
-            this.throwableObjects.forEach((to) => {
+            this.throwableObjects.forEach((to, indexTo) => {
                 if (enemy.isColliding(to)) {
+                    this.deleteThrowableObject(indexTo);
                     this.deleteEnemies(index);
                 }
             })
@@ -111,12 +114,18 @@ class World {
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
             this.throwableObjects.forEach((to) => {
-                if(boss.isColliding(to)) {
-                    this.character.hitEndboss();
-                    this.StatusBarEndboss.setPercentageHealth(this.character.endbossEnergy);
+                if (boss.isColliding(to)) {
+                    this.lastCollision = new Date().getTime();
+                    this.deleteThrowableObject(to);
+                    this.level.endboss[0].hitEndboss();
+                    this.StatusBarEndboss.setPercentageHealthEndboss(this.level.endboss[0].endbossEnergy);
                 }
             })
         })
+    }
+
+    deleteThrowableObject(indexTo) {
+        this.throwableObjects.splice(indexTo, 1);
     }
 
 
@@ -152,6 +161,7 @@ class World {
     */
     setWorld() {
         this.character.world = this;
+        this.level.endboss[0].world = this;
     }
 
 
@@ -203,11 +213,13 @@ class World {
      * Diese Funktion wird ausgeführt, wenn der Character stirbt
      */
     showGameOverScreen() {
-        if (this.character.energy == 0) {
+        let collision = this.lastCollision - new Date().getTime();
+        if (this.level.endboss[0].endbossEnergy < 1  && collision < -1500 || this.character.energy == 0  && collision < -1500) {
             this.addToMap(this.gameOverScreen);
             document.getElementById('replay-button-container').classList.remove('d-none');
             stopGame();
         }
+        //console.log(collision);
     }
 
 
@@ -232,6 +244,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
+        //------show frame objects--------
         //movableObject.drawFrameObjects(this.ctx);
         //movableObject.drawFrameNormalChicken(this.ctx);
         //movableObject.drawFrameSmallChicken(this.ctx);

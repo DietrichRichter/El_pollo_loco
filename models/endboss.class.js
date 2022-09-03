@@ -25,13 +25,26 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/3_attack/G19.png',
         'img/4_enemie_boss_chicken/3_attack/G20.png',
     ]
+    IMAGES_HURT = [
+        'img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'img/4_enemie_boss_chicken/4_hurt/G23.png',
+    ]
+    IMAGES_DEAD = [
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png',
+    ]
     width = 230;
     height = 263.5
     position_x = 5000;
     position_y = 175;
     speed = 22.20;
     world;
+    test = false;
     walk = true;
+    endbossEnergy = 100;
+    lastHitEndboss = 0;
     offset = {
         top: 0,
         left: 0,
@@ -44,6 +57,8 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 
@@ -53,17 +68,23 @@ class Endboss extends MovableObject {
     */
     animate() {
         setStoppableInterval(() => {
-            if (this.enbossAttackZone = true) {
+            if (this.position_x > 4500) {
+                this.moveLeft();
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+            if (this.position_x < 4500) {
+                this.playAnimation(this.IMAGES_ALERT);
+            }
+            if (this.isHurtEndboss) {
+                this.playAnimation(this.IMAGES_HURT);
+            }
+            if (this.endbossEnergy < 1) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+            if (this.world.character.position_x > 4000) {
                 this.attackEndbossAnimation();
             }
-            if (this.positionOfEndboss() > 4500) {
-                this.moveEndbossAnimate();
-            }
-            if (this.positionOfEndboss() < 4500) {
-                this.alertEndbossAnimation();
-            }
         }, 250);
-        this.moveEndbossPosition();
     }
 
 
@@ -71,14 +92,12 @@ class Endboss extends MovableObject {
      * Mit dieser Funktion wird der Endboss bis zu einem bestimmten Punkt bewegt
      */
     moveEndbossPosition() {
-        setStoppableInterval(() => {
-            if (this.walk) {
-                this.moveLeft();
-            }
-            if (this.position_x < 4490) {
-                this.walk = false;
-            }
-        }, 1000 / 60);
+        if (this.walk) {
+            this.moveLeft();
+        }
+        if (this.position_x < 4490) {
+            this.walk = false;
+        }
     }
 
 
@@ -118,5 +137,20 @@ class Endboss extends MovableObject {
      */
     positionOfEndboss() {
         this.position_x
+    }
+
+    hitEndboss() {
+        this.endbossEnergy -= 19.9;
+        if (this.endbossEnergy < 0) {
+            this.endbossEnergy = 0;
+        } else {
+            this.lastHitEndboss = new Date().getTime();
+        }
+    }
+
+    isHurtEndboss() {
+        let timepassed = new Date().getTime() - this.lastHitEndboss;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
     }
 }

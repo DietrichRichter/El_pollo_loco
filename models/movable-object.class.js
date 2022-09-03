@@ -4,11 +4,10 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2;
     energy = 100;
-    endbossEnergy = 100;
     coinCollect = 0;
     bottleCollect = 0;
     lastHit = 0;
-    enbossAttackZone;
+    enbossAttackZone = false;
     offset = {
         top: 0,
         left: 0,
@@ -132,15 +131,6 @@ class MovableObject extends DrawableObject {
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-    }
-
-    hitEndboss() {
-        this.endbossEnergy -= 5;
-        if (this.endbossEnergy < 0) {
-            this.endbossEnergy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }

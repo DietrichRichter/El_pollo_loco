@@ -124,11 +124,10 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
             }
+
         }, 150);
     }
 
@@ -165,11 +164,11 @@ class Character extends MovableObject {
      */
     endbossAttack() {
         setStoppableInterval(() => {
-        if (this.position_x > 4400) {
-            this.world.level.endboss[0].endbossAttackZone = true;
-        } else {
-            this.world.level.endboss[0].endbossAttackZone = false;
-        }
-       }, 100);
+            if (this.position_x > 4300) {
+                this.world.level.endboss[0].endbossAttackZone = true;
+            } else {
+                this.world.level.endboss[0].endbossAttackZone = false;
+            }
+        }, 100);
     }
 }

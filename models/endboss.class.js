@@ -68,7 +68,7 @@ class Endboss extends MovableObject {
     */
     animate() {
         setStoppableInterval(() => {
-            if (this.position_x > 4500) {
+            if (this.position_x > 4490) {
                 this.moveEndbossPosition();
                 this.playAnimation(this.IMAGES_WALKING);
             }

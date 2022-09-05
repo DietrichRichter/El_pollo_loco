@@ -75,12 +75,17 @@ canvas {
 .start-game-button {
     height: 65px;
     width: 125px;
-    color: yellow;
+    color: black;
     border: 0;
-    border-radius: 3px;
-    background-color: red;
+    border-radius: 50px;
+    background-color: blue;
     cursor: pointer;
     font-size: 24px;
+    box-shadow: 1px 1px 1px 1px;
+}
+
+.start-game-button:hover {
+    background-color: green;
 }
 
 .touch-icons-main-container {
@@ -102,6 +107,9 @@ canvas {
     width: 200px;
     justify-content: space-around;
 }
+
+
+
 
 @media only screen and (max-width: 720px){
     canvas {

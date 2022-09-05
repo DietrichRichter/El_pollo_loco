@@ -124,6 +124,11 @@ class World {
         })
     }
 
+
+    /**
+     * Mit dieser Funktion wird die geworfene Flasche aus dem Array entfernt
+     * @param {*} indexTo gibt den Wert der geworfenen Flasche zurück
+     */
     deleteThrowableObject(indexTo) {
         this.throwableObjects.splice(indexTo, 1);
     }
@@ -161,7 +166,6 @@ class World {
     */
     setWorld() {
         this.character.world = this;
-        this.level.endboss[0].world = this;
     }
 
 

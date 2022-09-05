@@ -39,10 +39,10 @@ class Endboss extends MovableObject {
     height = 263.5
     position_x = 5000;
     position_y = 175;
-    speed = 22.20;
+    speed = 2.20;
     world;
-    test = false;
     walk = true;
+    endbossAttackZone = false;
     endbossEnergy = 100;
     lastHitEndboss = 0;
     offset = {
@@ -69,20 +69,20 @@ class Endboss extends MovableObject {
     animate() {
         setStoppableInterval(() => {
             if (this.position_x > 4500) {
-                this.moveLeft();
+                this.moveEndbossPosition();
                 this.playAnimation(this.IMAGES_WALKING);
             }
             if (this.position_x < 4500) {
                 this.playAnimation(this.IMAGES_ALERT);
             }
-            if (this.isHurtEndboss) {
+            if (this.isHurtEndboss()) {
                 this.playAnimation(this.IMAGES_HURT);
             }
             if (this.endbossEnergy < 1) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
-            if (this.world.character.position_x > 4000) {
-                this.attackEndbossAnimation();
+            if (this.endbossAttackZone = true) {
+                this.playAnimation(this.IMAGES_ATTACK);
             }
         }, 250);
     }
@@ -102,43 +102,8 @@ class Endboss extends MovableObject {
 
 
     /**
-     * Mit dieser Funktion wird die bewegunsanimation vom Endboss ausgeführt
+     * Mit dieser Funktion wird der Schaden hinzugefügt
      */
-    moveEndbossAnimate() {
-        this.playAnimation(this.IMAGES_WALKING);
-    }
-
-
-    /**
-     * Mit dieser Funktion wird die alertanimation vom Endboss ausgeführt
-     */
-    alertEndbossAnimation() {
-        let i = this.currenImage % this.IMAGES_ALERT.length;
-        let path = this.IMAGES_ALERT[i];
-        this.img = this.imageCache[path];
-        this.currenImage++
-    }
-
-
-    /**
-     * Mit dieser Funktion wird die attackanimation vom Endboss ausgeführt
-     */
-    attackEndbossAnimation() {
-        let i = this.currenImage % this.IMAGES_ATTACK.length;
-        let path = this.IMAGES_ATTACK[i];
-        this.img = this.imageCache[path];
-        this.currenImage++
-    }
-
-
-    /**
-     * Die Position von dem Endboss wird zurückgegeben
-     * @returns position_x
-     */
-    positionOfEndboss() {
-        this.position_x
-    }
-
     hitEndboss() {
         this.endbossEnergy -= 19.9;
         if (this.endbossEnergy < 0) {
@@ -148,6 +113,11 @@ class Endboss extends MovableObject {
         }
     }
 
+
+    /**
+     * Mit dieser Funktion wird ermittelt, wann der Endboss das letzte mal getroffen wurde
+     * @returns gibt den Wert vom letzten Hit zurück
+     */
     isHurtEndboss() {
         let timepassed = new Date().getTime() - this.lastHitEndboss;
         timepassed = timepassed / 1000;

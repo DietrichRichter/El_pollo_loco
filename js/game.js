@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let intervallIds = [];
 
+
 /**
  * Diese Funktion wird nachdem das HTML geladen wurde, ausgeführt
  */
@@ -103,6 +104,10 @@ window.addEventListener('keyup', (e) => {
     }
 });
 
+
+/**
+ * Mit dieser Funktion wurden die Touch-Buttons hinzugefügt
+ */
 function TouchButtons() {
     document.getElementById('button-left').addEventListener('touchstart', (event) => {
         event.preventDefault();

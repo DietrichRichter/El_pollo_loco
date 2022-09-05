@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
     coinCollect = 0;
     bottleCollect = 0;
     lastHit = 0;
-    enbossAttackZone = false;
     offset = {
         top: 0,
         left: 0,

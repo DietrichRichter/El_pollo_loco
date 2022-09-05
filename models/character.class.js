@@ -165,7 +165,7 @@ class Character extends MovableObject {
      */
     endbossAttack() {
         setStoppableInterval(() => {
-        if (this.position_x > 4100) {
+        if (this.position_x > 4400) {
             this.world.level.endboss[0].endbossAttackZone = true;
         } else {
             this.world.level.endboss[0].endbossAttackZone = false;

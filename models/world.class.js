@@ -11,7 +11,7 @@ class World {
     StatusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     gameOverScreen = new GameOver();
-    lastCollision;
+    lastCollision = [];
 
 
     constructor(canvas, keyboard, intervallIds) {
@@ -62,7 +62,6 @@ class World {
     collisionWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.lastCollision = new Date().getTime();
                 this.character.hit();
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
@@ -115,7 +114,6 @@ class World {
             }
             this.throwableObjects.forEach((to) => {
                 if (boss.isColliding(to)) {
-                    this.lastCollision = new Date().getTime();
                     this.deleteThrowableObject(to);
                     this.level.endboss[0].hitEndboss();
                     this.StatusBarEndboss.setPercentageHealthEndboss(this.level.endboss[0].endbossEnergy);
@@ -217,8 +215,10 @@ class World {
      * Diese Funktion wird ausgeführt, wenn der Character stirbt
      */
     showGameOverScreen() {
-        let collision = this.lastCollision - new Date().getTime();
-        if (this.level.endboss[0].endbossEnergy < 1  && collision < -1500 || this.character.energy == 0  && collision < -1500) {
+        if (this.level.endboss[0].endbossEnergy < 1 || this.character.energy == 0) {
+            this.lastCollision.push(1);
+        }
+        if (this.lastCollision.length >= 100) {
             this.addToMap(this.gameOverScreen);
             document.getElementById('replay-button-container').classList.remove('d-none');
             stopGame();

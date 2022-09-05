@@ -39,7 +39,7 @@ class Endboss extends MovableObject {
     height = 263.5
     position_x = 5000;
     position_y = 175;
-    speed = 2.20;
+    speed = 40;
     world;
     walk = true;
     endbossAttackZone = false;

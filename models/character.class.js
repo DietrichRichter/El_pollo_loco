@@ -97,15 +97,15 @@ class Character extends MovableObject {
      */
     movePositionCharacter() {
         setStoppableInterval(() => {
-            if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x) {
+            if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x && this.world.lastCollision < 1) {
                 this.moveRight();
                 this.otherDirection = false;
             }
-            if (this.world.keyboard.LEFT && this.position_x > 0) {
+            if (this.world.keyboard.LEFT && this.position_x > 0 && this.world.lastCollision < 1) {
                 this.moveLeft();
                 this.otherDirection = true;
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround() && this.world.lastCollision < 1) {
                 this.jump();
             }
             this.world.camera_x = -this.position_x + 50;

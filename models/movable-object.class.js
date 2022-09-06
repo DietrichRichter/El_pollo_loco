@@ -21,10 +21,46 @@ class MovableObject extends DrawableObject {
      * @returns gibt die Werte der einzelnen Objekte zurück
      */
     isColliding(movableObject) {
-        return this.position_x + this.width - this.offset.right > movableObject.position_x + movableObject.offset.left &&
-            this.position_y + this.height - this.offset.bottom > movableObject.position_y + movableObject.offset.top &&
-            this.position_x + this.offset.left < movableObject.position_x + movableObject.width - movableObject.offset.right &&
-            this.position_y + this.offset.top < movableObject.position_y + movableObject.height - movableObject.offset.bottom;
+        return this.getRightPosition() > movableObject.getLeftPosition() &&
+            this.getBottomPosition() > movableObject.getTopPosition() &&
+            this.getLeftPosition() < movableObject.getRightPosition() &&
+            this.getTopPosition() < movableObject.getBottomPosition();
+    }
+
+
+    /**
+     * Diese Funktion gibt die Position zurück
+     * @returns gibt die rechte Position vom Objekt zurück
+     */
+    getRightPosition() {
+        return this.position_x + this.width - this.offset.right
+    }
+
+
+    /**
+     * Diese Funktion gibt die Position zurück
+     * @returns gibt die linke Position vom Objekt zurück
+     */
+    getLeftPosition() {
+        return this.position_x + this.offset.left
+    }
+
+
+    /**
+     * Diese Funktion gibt die Position zurück
+     * @returns gibt die untere Position vom Objekt zurück
+     */
+    getBottomPosition() {
+        return this.position_y + this.height - this.offset.bottom
+    }
+
+
+    /**
+     * Diese Funktion gibt die Position zurück
+     * @returns gibt die obere Position vom Objekt zurück
+     */
+    getTopPosition() {
+        return this.position_y + this.offset.top
     }
 
 
@@ -140,8 +176,8 @@ class MovableObject extends DrawableObject {
      * Wird ausgeführt wenn das Objekt stirbt
      * @returns gibt den Wert 0 zurück
      */
-    isDead() {
-        return this.energy == 0;
+    isDead(energy) {
+        return energy < 1;
     }
 
 

@@ -39,12 +39,11 @@ class Endboss extends MovableObject {
     height = 263.5
     position_x = 5000;
     position_y = 175;
-    speed = 40;
+    speed = 4;
     world;
     walk = true;
-    endbossAttackZone = false;
+    isEndbossinAttackZone = false;
     endbossEnergy = 100;
-    lastHitEndboss = 0;
     offset = {
         top: 0,
         left: 0,
@@ -68,21 +67,17 @@ class Endboss extends MovableObject {
     */
     animate() {
         setStoppableInterval(() => {
-            if (this.position_x > 4490) {
-                this.moveEndbossPosition();
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-            if (this.position_x < 4500) {
-                this.playAnimation(this.IMAGES_ALERT);
-            }
-            if (this.isHurtEndboss()) {
-                this.playAnimation(this.IMAGES_HURT);
-            }
             if (this.endbossEnergy < 1) {
                 this.playAnimation(this.IMAGES_DEAD);
-            }
-            if (this.endbossAttackZone = true) {
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else if (this.isEndbossinAttackZone) {
                 this.playAnimation(this.IMAGES_ATTACK);
+            } else if (this.position_x < 4500) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } else if (this.position_x > 4490) {
+                this.moveEndbossPosition();
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 250);
     }
@@ -109,18 +104,7 @@ class Endboss extends MovableObject {
         if (this.endbossEnergy < 0) {
             this.endbossEnergy = 0;
         } else {
-            this.lastHitEndboss = new Date().getTime();
+            this.lastHit = new Date().getTime();
         }
-    }
-
-
-    /**
-     * Mit dieser Funktion wird ermittelt, wann der Endboss das letzte mal getroffen wurde
-     * @returns gibt den Wert vom letzten Hit zurück
-     */
-    isHurtEndboss() {
-        let timepassed = new Date().getTime() - this.lastHitEndboss;
-        timepassed = timepassed / 1000;
-        return timepassed < 1;
     }
 }

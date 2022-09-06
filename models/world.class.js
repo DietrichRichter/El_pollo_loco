@@ -62,7 +62,7 @@ class World {
     collisionWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
+                this.character.hit(this.energy);
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
             this.throwableObjects.forEach((to, indexTo) => {
@@ -109,7 +109,7 @@ class World {
     collisionWithEndboss() {
         this.level.endboss.forEach((boss) => {
             if (this.character.isColliding(boss)) {
-                this.character.hit();
+                this.character.hit(this.energy);
                 this.statusBarHealth.setPercentageHealth(this.character.energy);
             }
             this.throwableObjects.forEach((to) => {
@@ -223,7 +223,6 @@ class World {
             document.getElementById('replay-button-container').classList.remove('d-none');
             stopGame();
         }
-        //console.log(collision);
     }
 
 

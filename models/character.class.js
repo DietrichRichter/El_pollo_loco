@@ -58,12 +58,12 @@ class Character extends MovableObject {
     ]
     position_y = 190;
     world;
-    speed = 20;
+    speed = 3;
     offset = {
         top: 120,
         left: 40,
         right: 45,
-        bottom: 10,
+        bottom: 0,
     }
 
 
@@ -164,7 +164,7 @@ class Character extends MovableObject {
      */
     endbossAttack() {
         setStoppableInterval(() => {
-            if (this.position_x > 4300) {
+            if (this.position_x > 4100) {
                 this.world.level.endboss[0].isEndbossinAttackZone = true;
             } else {
                 this.world.level.endboss[0].isEndbossinAttackZone = false;

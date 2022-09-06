@@ -62,8 +62,12 @@ class World {
     collisionWithEnemies() {
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit(this.energy);
-                this.statusBarHealth.setPercentageHealth(this.character.energy);
+                if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+                    this.deleteEnemies(index);
+                } else {
+                    this.character.hit(this.energy);
+                    this.statusBarHealth.setPercentageHealth(this.character.energy);
+                }
             }
             this.throwableObjects.forEach((to, indexTo) => {
                 if (enemy.isColliding(to)) {

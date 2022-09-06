@@ -11,7 +11,7 @@ class NormalChicken extends MovableObject {
     height = 59;
     position_y = 370;
     offset = {
-        top: 0,
+        top: -10,
         left: 0,
         right: 0,
         bottom: 0,

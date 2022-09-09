@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervallIds = [];
+let loadingScreenTime = [];
 
 
 /**
@@ -21,6 +22,17 @@ function startGame() {
     world = new World(canvas, keyboard);
     document.getElementById('start-game-container').classList.add('d-none');
     document.getElementById('start-screen').classList.add('d-none');
+    loadingScreen();
+}
+
+function loadingScreen() {
+    document.getElementById('loading-screen').classList.remove('d-none');
+    setInterval(() => {
+        loadingScreenTime.push(1);
+        if (loadingScreenTime.length > 5) {
+            document.getElementById('loading-screen').classList.add('d-none');
+        }
+    }, 1000);
 }
 
 

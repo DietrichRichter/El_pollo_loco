@@ -10,12 +10,10 @@ class World {
     statusBarBottle = new StatusBarBottle();
     StatusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
-    gameOverScreen = new GameOver();
+    youLose = new YouLose();
+    gameOver = new GameOver();
     lastCollision = [];
-    gameMusic = new Audio('audio/music.mp3');
-    COLLECT_COIN_SOUND = new Audio('audio/coin-collect.mp3');
-    COLLECT_BOTTLE_SOUND = new Audio('audio/bottle-collect.mp3');
-    BOTTLE_BREAK_SOUND = new Audio('audio/bottle-breaking.mp3');
+    lastBottleWithBossCollision = [];
 
 
     constructor(canvas, keyboard, intervallIds) {
@@ -27,8 +25,6 @@ class World {
         this.setWorld();
         this.checkThrowObjects();
         this.checkCollision();
-        this.gameMusic.play();
-        this.gameMusic.volume = 0.2;
     }
 
 
@@ -66,7 +62,6 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit den Hähnchen Koolidiert
      */
     collisionWithEnemies() {
-        this.BOTTLE_BREAK_SOUND.pause();
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
@@ -78,7 +73,6 @@ class World {
             }
             this.throwableObjects.forEach((to, indexTo) => {
                 if (enemy.isColliding(to)) {
-                    this.BOTTLE_BREAK_SOUND.play();
                     this.deleteThrowableObject(indexTo);
                     this.deleteEnemies(index);
                 }
@@ -91,10 +85,8 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit den Coiins Koolidiert
      */
     collisionWithCoin() {
-        this.COLLECT_COIN_SOUND.pause();
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
-                this.COLLECT_COIN_SOUND.play();
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
                 this.deleteTheCoin(index);
@@ -107,10 +99,8 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit den Flaschen Koolidiert
      */
     collisionWithBottle() {
-        this.COLLECT_BOTTLE_SOUND.pause();
         this.level.bottleGround.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
-                this.COLLECT_BOTTLE_SOUND.play();
                 this.character.collectBottles();
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
                 this.deleteTheBottle(index);
@@ -123,7 +113,6 @@ class World {
      * Mit dieser Funktion wird überprüft, ob der Charakter mit dem Endboss Koolidiert
      */
     collisionWithEndboss() {
-        this.BOTTLE_BREAK_SOUND.pause();
         this.level.endboss.forEach((boss) => {
             if (this.character.isColliding(boss)) {
                 this.character.hit(this.energy);
@@ -131,7 +120,6 @@ class World {
             }
             this.throwableObjects.forEach((to) => {
                 if (boss.isColliding(to)) {
-                    this.BOTTLE_BREAK_SOUND.play();
                     this.deleteThrowableObject(to);
                     this.level.endboss[0].hitEndboss();
                     this.StatusBarEndboss.setPercentageHealthEndboss(this.level.endboss[0].endbossEnergy);
@@ -203,6 +191,7 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
+        this.showYouLoseScreen();
         this.showGameOverScreen();
         this.showBossEnergy();
         this.ctx.translate(this.camera_x, 0);
@@ -232,12 +221,24 @@ class World {
     /**
      * Diese Funktion wird ausgeführt, wenn der Character stirbt
      */
-    showGameOverScreen() {
-        if (this.level.endboss[0].endbossEnergy < 1 || this.character.energy == 0) {
+    showYouLoseScreen() {
+        if (this.character.energy == 0) {
             this.lastCollision.push(1);
         }
         if (this.lastCollision.length >= 100) {
-            this.addToMap(this.gameOverScreen);
+            this.addToMap(this.youLose);
+            document.getElementById('replay-button-container').classList.remove('d-none');
+            stopGame();
+        }
+    }
+
+
+    showGameOverScreen() {
+        if (this.level.endboss[0].endbossEnergy < 1) {
+            this.lastBottleWithBossCollision.push(1);
+        }
+        if (this.lastBottleWithBossCollision.length >= 100) {
+            this.addToMap(this.gameOver);
             document.getElementById('replay-button-container').classList.remove('d-none');
             stopGame();
         }

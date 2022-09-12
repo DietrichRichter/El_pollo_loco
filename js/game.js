@@ -22,6 +22,7 @@ function startGame() {
     world = new World(canvas, keyboard);
     document.getElementById('start-game-container').classList.add('d-none');
     document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('canvas-container').classList.remove('d-none');
     loadingScreen();
 }
 

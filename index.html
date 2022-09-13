@@ -35,8 +35,10 @@
 
     <h1>El pollo loco</h1>
 
-    <div id="canvas-container" class="canvas-container d-none">
-        <canvas id="canvas" width="720" height="480"></canvas>
+    <div class="canvas-container">
+
+        <canvas id="canvas" width="720px" height="480px"></canvas>
+
         <div class="touch-icons-main-container">
             <div class="touch-icon-container">
                 <div>
@@ -55,22 +57,34 @@
                 </div>
             </div>
         </div>
-        <div id="loading-screen" class="loading-screen-container d-none">
+
+        <div class="start-screen" id="start-screen">
+            <img src="img/9_intro_outro_screens/start/startscreen_1.png">
+        </div>
+
+        <div id="loading-screen" class="loading-screen d-none">
             <div class="center">
                 <div class="ring"></div>
                 <span>loading...</span>
             </div>
         </div>
+
+        <div class="start-game-container" id="start-game-container">
+            <button onclick="startGame()" class="start-game-button">Start Game</button>
+        </div>
+
+        <div id="replay-button-container" class="start-game-container d-none">
+            <button onclick="restartGame()" class="start-game-button">Replay</button>
+        </div>
     </div>
-    <div class="start-screen" id="start-screen">
-        <img src="img/9_intro_outro_screens/start/startscreen_1.png">
-    </div>
-    <div class="start-game-container" id="start-game-container">
-        <button onclick="startGame()" class="start-game-button">Start Game</button>
-    </div>
-    <div id="replay-button-container" class="start-game-container d-none">
-        <button onclick="restartGame()" class="start-game-button">Replay</button>
-    </div>
+
+
+
+
+
+    <!--<div id="canvas-container" class="canvas-container d-none">
+        
+-->
 
 
 </body>

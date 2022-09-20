@@ -35,11 +35,11 @@
 
     <h1>El pollo loco</h1>
 
-    <div class="canvas-container">
+    <div id="canvas-container" class="canvas-container">
 
-        <canvas id="canvas" width="720px" height="480px"></canvas>
+        <canvas class="d-none" id="canvas" width="720px" height="480px"></canvas>
 
-        <div class="touch-icons-main-container">
+        <div id="touch.icons" class="touch-icons-main-container d-none">
             <div class="touch-icon-container">
                 <div>
                     <img id="button-left" src="img/icons/arrow-left.png">
@@ -68,24 +68,54 @@
                 <span>loading...</span>
             </div>
         </div>
+        
+        <div class="play-button">
+            <img onclick="startGame()" src="img/icons/play.png">
+        </div>
 
-        <div class="start-game-container" id="start-game-container">
-            <button onclick="startGame()" class="start-game-button">Start Game</button>
+        <div id="sound-off" onclick="soundOff()" class="sound-on-button">
+            <img src="img/icons/sound-on.png">
+        </div>
+
+        <div id="sound-on" onclick="soundOn()" class="sound-off-button d-none">
+            <img src="img/icons/sound-off.png">
+        </div>
+
+        <div id="controller-on" onclick="showControllerInfo()" class="controller">
+            <img src="img/icons/controller.png">
+        </div>
+
+        <div id="controller-off" onclick="closeControllerInfo()" class="controller d-none">
+            <img src="img/icons/controller.png">
+        </div>
+
+        <div id="controller-info" class="controller-info d-none">
+            <div>
+                <img src="img/icons/phone.png">
+                <img src="img/icons/keyboard.png">
+            </div>
+            <div>
+                <img class="arrow" src="img/icons/arrow-left.png">
+                <img src="img/icons/key-left.png">
+            </div>
+            <div>
+                <img class="arrow" src="img/icons/arrow-right.png">
+                <img src="img/icons/key-right.png">
+            </div>
+            <div>
+                <img class="arrow" src="img/icons/arrow-up.png">
+                <img src="img/icons/key-up.png">
+            </div>
+            <div>
+                <img class="arrow" src="img/6_salsa_bottle/salsa_bottle.png">
+                <img src="img/icons/key-D.png">
+            </div>
         </div>
 
         <div id="replay-button-container" class="start-game-container d-none">
             <button onclick="restartGame()" class="start-game-button">Replay</button>
         </div>
     </div>
-
-
-
-
-
-    <!--<div id="canvas-container" class="canvas-container d-none">
-        
--->
-
 
 </body>
 

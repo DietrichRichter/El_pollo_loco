@@ -20,9 +20,12 @@ function init() {
 function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
-    document.getElementById('start-game-container').classList.add('d-none');
     document.getElementById('start-screen').classList.add('d-none');
-    document.getElementById('canvas-container').classList.remove('d-none');
+    document.getElementById('touch.icons').classList.remove('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('controller-on').classList.add('d-none');
+    document.getElementById('controller-off').classList.add('d-none');
+    document.getElementById('controller-info').classList.add('d-none');
     loadingScreen();
 }
 
@@ -61,6 +64,31 @@ function stopGame() {
  */
 function restartGame() {
     window.location.reload();
+}
+
+
+function soundOff() {
+    document.getElementById('sound-off').classList.add('d-none');
+    document.getElementById('sound-on').classList.remove('d-none');
+}
+
+
+function soundOn() {
+    document.getElementById('sound-on').classList.add('d-none');
+    document.getElementById('sound-off').classList.remove('d-none');
+}
+
+
+function showControllerInfo() {
+    document.getElementById('controller-info').classList.remove('d-none');
+    document.getElementById('controller-off').classList.remove('d-none');
+    document.getElementById('controller-on').classList.add('d-none');
+}
+
+function closeControllerInfo() {
+    document.getElementById('controller-info').classList.add('d-none');
+    document.getElementById('controller-off').classList.add('d-none');
+    document.getElementById('controller-on').classList.remove('d-none');
 }
 
 

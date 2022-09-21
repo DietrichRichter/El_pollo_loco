@@ -49,7 +49,7 @@ canvas {
 .touch-icons-main-container {
     z-index: 1;
     position: relative;
-    bottom: 75px;
+    bottom: 55px;
     display: flex;
     justify-content: space-between;
 }
@@ -61,8 +61,8 @@ canvas {
 }
 
 .touch-icon-container img {
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
 }
 
 .loading-screen {

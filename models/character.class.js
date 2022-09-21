@@ -65,6 +65,7 @@ class Character extends MovableObject {
         right: 45,
         bottom: 0,
     }
+    AUDIO_WALKING = new Audio('audio/walking.mp3');
 
 
     constructor() {
@@ -97,20 +98,26 @@ class Character extends MovableObject {
      */
     movePositionCharacter() {
         setStoppableInterval(() => {
+            this.stopAudio(this.AUDIO_WALKING);
             if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x && this.world.lastCollision < 1) {
                 this.moveRight();
+                this.playAudio(this.AUDIO_WALKING);
                 this.otherDirection = false;
                 if (!this.isAboveGround()) {
                 }
             }
             if (this.world.keyboard.LEFT && this.position_x > 0 && this.world.lastCollision < 1) {
                 this.moveLeft();
+                this.playAudio(this.AUDIO_WALKING);
                 this.otherDirection = true;
                 if (!this.isAboveGround()) {
                 }
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround() && this.world.lastCollision < 1) {
                 this.jump();
+            }
+            if (this.isAboveGround()) {
+                this.stopAudio(this.AUDIO_WALKING);
             }
             this.world.camera_x = -this.position_x + 50;
         }, 1000 / 60);
@@ -173,5 +180,25 @@ class Character extends MovableObject {
                 this.world.level.endboss[0].isEndbossinAttackZone = false;
             }
         }, 100);
+    }
+
+
+    /**
+    * Mit dieser Funktion wird ein Sound abgespielt
+    * @param {*} sound gibt den Sound zurück
+    */
+    playAudio(sound) {
+        if (this.world.soundOn) {
+            sound.play();
+        }
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein Sound pausiert
+     * @param {*} sound gibt den Sound zurück
+     */
+    stopAudio(sound) {
+        sound.pause();
     }
 }

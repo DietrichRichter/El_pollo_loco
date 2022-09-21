@@ -77,6 +77,7 @@ function restartGame() {
 function soundOff() {
     document.getElementById('sound-off').classList.add('d-none');
     document.getElementById('sound-on').classList.remove('d-none');
+    world.soundOn = false;
 }
 
 
@@ -86,6 +87,7 @@ function soundOff() {
 function soundOn() {
     document.getElementById('sound-on').classList.add('d-none');
     document.getElementById('sound-off').classList.remove('d-none');
+    world.soundOn = true;
 }
 
 

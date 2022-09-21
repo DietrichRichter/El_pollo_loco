@@ -14,6 +14,14 @@ class World {
     gameOver = new GameOver();
     lastCollision = [];
     lastBottleWithBossCollision = [];
+    AUDIO_BOTTLE_BREAK = new Audio('audio/bottle-breaking.mp3');
+    AUDIO_BOTTLE_COLLECT = new Audio('audio/bottle-collect.mp3');
+    AUDIO_COIN_COLLECT = new Audio('audio/coin-collect.mp3');
+    AUDIO_HIT = new Audio('audio/hit.mp3');
+    AUDIO_LOSE = new Audio('audio/lose.mp3');
+    AUDIO_SOUNDTRACK = new Audio('audio/soundtrack.mp3');
+    AUDIO_WIN = new Audio('audio/win.mp3');
+    soundOn = true;
 
 
     constructor(canvas, keyboard, intervallIds) {
@@ -25,6 +33,22 @@ class World {
         this.setWorld();
         this.checkThrowObjects();
         this.checkCollision();
+        this.playSoundTrack();
+        this.AUDIO_SOUNDTRACK.volume = 0.05;
+        this.AUDIO_HIT.volume = 0.2;
+        this.AUDIO_WIN.volume = 0.2;
+        this.AUDIO_LOSE.volume = 0.2;
+    }
+
+
+    /**
+     * Mit dieser Funktion wird der Soundtrack abgespielt
+     */
+    playSoundTrack() {
+        setStoppableInterval(() => {
+            this.playAudio(this.AUDIO_SOUNDTRACK);
+            this.stopAudio(this.AUDIO_SOUNDTRACK);
+        }, 100);
     }
 
 
@@ -40,6 +64,28 @@ class World {
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
             }
         }, 100);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein Sound abgespielt
+     * @param {*} sound gibt den Sound zurück
+     */
+    playAudio(sound) {
+        if (this.soundOn) {
+            sound.play();
+        }
+    }
+
+
+    /**
+     * Mit dieser Funktion wird ein Sound pausiert
+     * @param {*} sound gibt den Sound zurück
+     */
+    stopAudio(sound) {
+        if (this.soundOn == false) {
+            sound.pause();
+        }
     }
 
 
@@ -67,12 +113,14 @@ class World {
                 if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                     this.deleteEnemies(index);
                 } else {
+                    this.playAudio(this.AUDIO_HIT);
                     this.character.hit(this.energy);
                     this.statusBarHealth.setPercentageHealth(this.character.energy);
-                }
+                } 
             }
             this.throwableObjects.forEach((to, indexTo) => {
                 if (enemy.isColliding(to)) {
+                    this.playAudio(this.AUDIO_BOTTLE_BREAK);
                     this.deleteThrowableObject(indexTo);
                     this.deleteEnemies(index);
                 }
@@ -87,6 +135,7 @@ class World {
     collisionWithCoin() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
+                this.playAudio(this.AUDIO_COIN_COLLECT);
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentageCoin(this.character.coinCollect);
                 this.deleteTheCoin(index);
@@ -101,6 +150,7 @@ class World {
     collisionWithBottle() {
         this.level.bottleGround.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
+                this.playAudio(this.AUDIO_BOTTLE_COLLECT);
                 this.character.collectBottles();
                 this.statusBarBottle.setPercentageBottle(this.character.bottleCollect);
                 this.deleteTheBottle(index);
@@ -120,6 +170,7 @@ class World {
             }
             this.throwableObjects.forEach((to) => {
                 if (boss.isColliding(to)) {
+                    this.playAudio(this.AUDIO_BOTTLE_BREAK);
                     this.deleteThrowableObject(to);
                     this.level.endboss[0].hitEndboss();
                     this.StatusBarEndboss.setPercentageHealthEndboss(this.level.endboss[0].endbossEnergy);
@@ -226,6 +277,8 @@ class World {
             this.lastCollision.push(1);
         }
         if (this.lastCollision.length >= 100) {
+            this.stopAudio(this.AUDIO_SOUNDTRACK);
+            this.playAudio(this.AUDIO_LOSE);
             this.addToMap(this.youLose);
             this.showReplayButton();
             this.hiddenIcons();
@@ -242,6 +295,8 @@ class World {
             this.lastBottleWithBossCollision.push(1);
         }
         if (this.lastBottleWithBossCollision.length >= 100) {
+            this.stopAudio(this.AUDIO_SOUNDTRACK);
+            this.playAudio(this.AUDIO_WIN);
             this.addToMap(this.gameOver);
             this.showReplayButton();
             this.hiddenIcons();

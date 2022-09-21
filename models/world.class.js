@@ -227,21 +227,46 @@ class World {
         }
         if (this.lastCollision.length >= 100) {
             this.addToMap(this.youLose);
-            document.getElementById('replay-button-container').classList.remove('d-none');
+            this.showReplayButton();
+            this.hiddenIcons();
             stopGame();
         }
     }
 
 
+    /**
+     * Diese Funktion wir ausgeführt, wenn der Endboss besiegt wurde
+     */
     showGameOverScreen() {
         if (this.level.endboss[0].endbossEnergy < 1) {
             this.lastBottleWithBossCollision.push(1);
         }
         if (this.lastBottleWithBossCollision.length >= 100) {
             this.addToMap(this.gameOver);
-            document.getElementById('replay-button-container').classList.remove('d-none');
+            this.showReplayButton();
+            this.hiddenIcons();
             stopGame();
         }
+    }
+
+
+    /**
+     * Mit dieser Funktion wird der Replay button angezeigt
+     */
+    showReplayButton() {
+        document.getElementById('replay-button-container').classList.remove('d-none');
+    }
+
+
+    /**
+     * Mit dieser Funktion werden beim anzeigen vom Endscreen die Icons entfernt
+     */
+    hiddenIcons() {
+        document.getElementById('play-button').classList.add('d-none');
+        document.getElementById('sound-off').classList.add('d-none');
+        document.getElementById('sound-on').classList.add('d-none');
+        document.getElementById('controller-on').classList.add('d-none');
+        document.getElementById('controller-off').classList.add('d-none');
     }
 
 

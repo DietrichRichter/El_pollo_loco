@@ -95,9 +95,9 @@ class DrawableObject {
 
 
     /**
-   * Mit dieser Funktion wird ein roter rand um den small Chicken gezeichnet
-   * @param {*} ctx gibt den canvas an
-   */
+     * Mit dieser Funktion wird ein roter rand um den small Chicken gezeichnet
+     * @param {*} ctx gibt den canvas an
+     */
     drawFrameSmallChicken(ctx) {
         if (this instanceof SmallChicken) {
             ctx.beginPath();
@@ -140,9 +140,9 @@ class DrawableObject {
 
 
     /**
-    * Mit dieser Funktion wird der Boss rot umrandet
-    * @param {*} ctx gibt den Canvas an
-    */
+     * Mit dieser Funktion wird der Boss rot umrandet
+     * @param {*} ctx gibt den Canvas an
+     */
     drawFrameEndboss(ctx) {
         if (this instanceof Endboss) {
             ctx.beginPath();

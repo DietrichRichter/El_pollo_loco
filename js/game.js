@@ -29,6 +29,10 @@ function startGame() {
     loadingScreen();
 }
 
+
+/**
+ * Mit dieser Funktion wird der Ladescreen angezeigt
+ */
 function loadingScreen() {
     document.getElementById('loading-screen').classList.remove('d-none');
     setInterval(() => {
@@ -67,24 +71,37 @@ function restartGame() {
 }
 
 
+/**
+ * Mit dieser Funktion wird der Sound Icon on angezeigt
+ */
 function soundOff() {
     document.getElementById('sound-off').classList.add('d-none');
     document.getElementById('sound-on').classList.remove('d-none');
 }
 
 
+/**
+ * Mit dieser Funktion wird der Sound Icon off angezeigt
+ */
 function soundOn() {
     document.getElementById('sound-on').classList.add('d-none');
     document.getElementById('sound-off').classList.remove('d-none');
 }
 
 
+/**
+ * Mit dieser Funktion wird der Controller Icon angezeigt
+ */
 function showControllerInfo() {
     document.getElementById('controller-info').classList.remove('d-none');
     document.getElementById('controller-off').classList.remove('d-none');
     document.getElementById('controller-on').classList.add('d-none');
 }
 
+
+/**
+ * Mit dieser Funktion wird der Controller Icon angezeigt
+ */
 function closeControllerInfo() {
     document.getElementById('controller-info').classList.add('d-none');
     document.getElementById('controller-off').classList.add('d-none');

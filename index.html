@@ -68,25 +68,26 @@
                 <span>loading...</span>
             </div>
         </div>
-        
-        <div id="play-button" class="play-button">
-            <img onclick="startGame()" src="img/icons/play.png">
-        </div>
+        <div class="icons-container">
+            <div id="play-button" class="play-button">
+                <img onclick="startGame()" src="img/icons/play.png">
+            </div>
 
-        <div id="sound-off" onclick="soundOff()" class="sound-on-button">
-            <img src="img/icons/sound-on.png">
-        </div>
+            <div id="sound-off" onclick="soundOff()" class="sound-on-button d-none">
+                <img src="img/icons/sound-on.png">
+            </div>
 
-        <div id="sound-on" onclick="soundOn()" class="sound-off-button d-none">
-            <img src="img/icons/sound-off.png">
-        </div>
+            <div id="sound-on" onclick="soundOn()" class="sound-off-button d-none">
+                <img src="img/icons/sound-off.png">
+            </div>
 
-        <div id="controller-on" onclick="showControllerInfo()" class="controller">
-            <img src="img/icons/controller.png">
-        </div>
+            <div id="controller-on" onclick="showControllerInfo()" class="controller">
+                <img src="img/icons/controller.png">
+            </div>
 
-        <div id="controller-off" onclick="closeControllerInfo()" class="controller d-none">
-            <img src="img/icons/controller.png">
+            <div id="controller-off" onclick="closeControllerInfo()" class="controller d-none">
+                <img src="img/icons/controller.png">
+            </div>
         </div>
 
         <div id="controller-info" class="controller-info d-none">
@@ -113,7 +114,7 @@
         </div>
 
         <div id="replay-button-container" class="start-game-container d-none">
-            <button onclick="restartGame()" class="start-game-button">Replay</button>
+            <button onclick="restartGame()" class="button-30" role="button">Replay</button>
         </div>
     </div>
 

@@ -131,36 +131,37 @@ canvas {
     width: 50px;
 }
 
-.play-button {
+.icons-container {
     position: absolute;
+    width: 100%;
+    z-index: 6;
+    top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.play-button {
     z-index: 6;
     cursor: pointer;
-    right: 10px;
-    top: 10px;
+    margin-right: 20px;
 }
 
 .sound-on-button {
-    position: absolute;
     z-index: 6;
     cursor: pointer;
-    right: 80px;
-    top: 10px;
+    margin-right: 20px;
 }
 
 .sound-off-button {
-    position: absolute;
     z-index: 6;
     cursor: pointer;
-    right: 80px;
-    top: 10px;
+    margin-right: 20px;
 }
 
 .controller {
-    position: absolute;
     z-index: 6;
-    cursor: pointer;
-    right: 150px;
-    top: 10px;  
+    cursor: pointer; 
+    margin-right: 20px;
 }
 
 .controller-info {
@@ -181,18 +182,56 @@ canvas {
     z-index: 3;
 }
 
-.start-game-button {
-    width: 100px;
-    height: 30px;
-    border-radius: 30px;
-    border: 0px;
-    background-color: green;
-    cursor: pointer;
-}
 
 .start-game-button:hover {
     background-color: rgb(0, 180, 0);
     box-shadow: 1px 1px 1px 1px rgb(31, 31, 31);
+}
+
+
+.button-30 {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 @media only screen and (max-width: 720px){

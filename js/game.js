@@ -26,6 +26,8 @@ function startGame() {
     document.getElementById('controller-on').classList.add('d-none');
     document.getElementById('controller-off').classList.add('d-none');
     document.getElementById('controller-info').classList.add('d-none');
+    document.getElementById('sound-off').classList.remove('d-none');
+    document.getElementById('play-button').classList.add('d-none');
     loadingScreen();
 }
 

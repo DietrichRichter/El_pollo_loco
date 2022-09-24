@@ -256,6 +256,68 @@ canvas {
     }
 }
 
+@media only screen and (max-width: 520px) {
+    .icons img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .controller-info {
+        bottom: 140px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .touch-icon-container img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .touch-icons-main-container {
+        bottom: 42px;
+    }
+
+    .controller-info {
+        bottom: 154px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .icons img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .controller-info {
+        bottom: 210px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .touch-icon-container img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .icons img {
+        height: 20px;
+        width: 20px;
+    }
+
+    .touch-icons-main-container {
+        bottom: 31px;
+    }
+
+    .icons img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .controller-info {
+        bottom: 237px;
+    }
+}
+
 @media only screen and (max-height: 480px){
     canvas {
         height: 100vh;

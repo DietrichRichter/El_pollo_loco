@@ -20,15 +20,31 @@ function init() {
 function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
-    document.getElementById('start-screen').classList.add('d-none');
-    document.getElementById('touch.icons').classList.remove('d-none');
-    document.getElementById('canvas').classList.remove('d-none');
+    removeIcons();
+    addIcons();
+    loadingScreen();
+}
+
+
+/**
+ * Mit dieser Funktion werden die Icons entfernt
+ */
+function removeIcons() {
+    document.getElementById('play-button').classList.add('d-none');
     document.getElementById('controller-on').classList.add('d-none');
     document.getElementById('controller-off').classList.add('d-none');
     document.getElementById('controller-info').classList.add('d-none');
+    document.getElementById('start-screen').classList.add('d-none');
+}
+
+
+/**
+ * Mit dieser Funktion werden die Icons angezeigt
+ */
+function addIcons() {
+    document.getElementById('touch.icons').classList.remove('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('sound-off').classList.remove('d-none');
-    document.getElementById('play-button').classList.add('d-none');
-    loadingScreen();
 }
 
 

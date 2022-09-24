@@ -114,9 +114,8 @@ class World {
                     this.deleteEnemies(index);
                 } else {
                     this.playAudio(this.AUDIO_HIT);
-                    this.character.hit(this.energy);
-                    this.statusBarHealth.setPercentageHealth(this.character.energy);
-                } 
+                    this.theCharacterGetsHurt();
+                }
             }
             this.throwableObjects.forEach((to, indexTo) => {
                 if (enemy.isColliding(to)) {
@@ -165,18 +164,35 @@ class World {
     collisionWithEndboss() {
         this.level.endboss.forEach((boss) => {
             if (this.character.isColliding(boss)) {
-                this.character.hit(this.energy);
-                this.statusBarHealth.setPercentageHealth(this.character.energy);
+                this.theCharacterGetsHurt();
             }
             this.throwableObjects.forEach((to) => {
                 if (boss.isColliding(to)) {
-                    this.playAudio(this.AUDIO_BOTTLE_BREAK);
-                    this.deleteThrowableObject(to);
-                    this.level.endboss[0].hitEndboss();
-                    this.StatusBarEndboss.setPercentageHealthEndboss(this.level.endboss[0].endbossEnergy);
+                    this.CollidionThrowableObjectWithEndboss(to);
                 }
             })
         })
+    }
+
+
+    /**
+     * Mit dieser Funktion wird dem Character schaden hinzugefügt und die energie nimmt ab
+     */
+    theCharacterGetsHurt() {
+        this.character.hit(this.energy);
+        this.statusBarHealth.setPercentageHealth(this.character.energy);
+    }
+
+
+    /**
+     * Diese Funktion überprüft, ob eine geworfene Flasche mit dem Endboss kolidiert
+     * @param {*} to gibt die geworfene Flasche zurück
+     */
+    CollidionThrowableObjectWithEndboss(to) {
+        this.playAudio(this.AUDIO_BOTTLE_BREAK);
+        this.deleteThrowableObject(to);
+        this.level.endboss[0].hitEndboss();
+        this.StatusBarEndboss.setPercentageHealthEndboss(this.level.endboss[0].endbossEnergy);
     }
 
 

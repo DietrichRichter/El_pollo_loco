@@ -99,28 +99,79 @@ class Character extends MovableObject {
     movePositionCharacter() {
         setStoppableInterval(() => {
             this.stopAudio(this.AUDIO_WALKING);
-            if (this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x && this.world.lastCollision < 1) {
+            if (this.canMoveRight()) {
                 this.moveRight();
-                this.playAudio(this.AUDIO_WALKING);
-                this.otherDirection = false;
-                if (!this.isAboveGround()) {
-                }
             }
-            if (this.world.keyboard.LEFT && this.position_x > 0 && this.world.lastCollision < 1) {
+            if (this.canMoveLeft()) {
                 this.moveLeft();
-                this.playAudio(this.AUDIO_WALKING);
-                this.otherDirection = true;
-                if (!this.isAboveGround()) {
-                }
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround() && this.world.lastCollision < 1) {
+            if (this.canJump()) {
                 this.jump();
             }
             if (this.isAboveGround()) {
                 this.stopAudio(this.AUDIO_WALKING);
             }
-            this.world.camera_x = -this.position_x + 50;
+            this.cameraPositionOfCharacter();
         }, 1000 / 60);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird die Kamera vom Character fixiert
+     */
+    cameraPositionOfCharacter() {
+        this.world.camera_x = -this.position_x + 50;
+    }
+
+
+    /**
+     * Diese Funktion überprüft, ob der Character sich nach rechts bewegen kann
+     * @returns gibt die Position vom Character zurück
+     */
+    canMoveRight() {
+        return this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x && this.world.lastCollision < 1;
+    }
+
+
+    /**
+     * Mit dieser Funktion wird der Character nach rechts bewegt
+     */
+    moveRight() {
+        super.moveRight();
+        this.playAudio(this.AUDIO_WALKING);
+        this.otherDirection = false;
+        if (!this.isAboveGround()) {
+        }
+    }
+
+    
+    /**
+     * Diese Funktion überprüft, ob der Character sich nach links bewegen kann
+     * @returns gibt die Position vom Character zurück
+     */
+    canMoveLeft() {
+        return this.world.keyboard.LEFT && this.position_x > 0 && this.world.lastCollision < 1;
+    }
+
+
+    /**
+     * Mit dieser Funktion wird der Character nach links bewegt
+     */
+    moveLeft() {
+        super.moveLeft();
+        this.playAudio(this.AUDIO_WALKING);
+        this.otherDirection = true;
+        if (!this.isAboveGround()) {
+        }
+    }
+
+
+    /**
+     * Mit dieser Funktion wird der Character nach oben bewegt
+     * @returns gibt die Position vom Character zurück
+     */
+    canJump() {
+        return this.world.keyboard.SPACE && !this.isAboveGround() && this.world.lastCollision < 1;
     }
 
 
@@ -135,7 +186,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else if (this.canMoveLeftOrRight()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 150);
@@ -143,14 +194,31 @@ class Character extends MovableObject {
 
 
     /**
+     * Mit dieser Funktion wird überprüft, ob die linke oder rechte Taste gedrückt wird
+     * @returns gibt die Tasteneingabe zurück
+     */
+    canMoveLeftOrRight() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+    }
+
+    /**
      * Mit dieser Funktion wird eine Animation erst dann ausgeführt, wenn keine tasten gerückt werden
      */
     idelAnimationCharacter() {
         setStoppableInterval(() => {
-            if (this.world.keyboard.RIGHT == false && this.world.keyboard.LEFT == false && this.energy > 1) {
+            if (this.isAKeyNotPressed()) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 1000);
+    }
+
+
+    /**
+     * Diese Funktion überprüft, ob eine Taste gedrückt wird und ob der Character noch am leben ist
+     * @returns gibt den Tastendruck zurück
+     */
+    isAKeyNotPressed() {
+        return this.world.keyboard.RIGHT == false && this.world.keyboard.LEFT == false && this.energy > 1;
     }
 
 
@@ -159,7 +227,7 @@ class Character extends MovableObject {
      */
     longIdleAnimationCharacter() {
         setStoppableInterval(() => {
-            if (this.world.keyboard.RIGHT == false && this.energy > 1) {
+            if (this.isAKeyNotPressed()) {
                 let lastMoves = this.world.keyboard.lastMove - new Date().getTime();
                 if (lastMoves < -5000) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);

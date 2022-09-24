@@ -263,7 +263,6 @@ canvas {
 
     .canvas-container {
         height: 100vh;
-        width: fit-content;
     }
 
     .loading-screen {

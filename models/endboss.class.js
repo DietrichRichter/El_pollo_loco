@@ -40,6 +40,7 @@ class Endboss extends MovableObject {
     position_x = 5000;
     position_y = 175;
     speed = 4;
+    attackSpeed = 20;
     world;
     walk = true;
     isEndbossinAttackZone = false;
@@ -73,6 +74,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isEndbossinAttackZone) {
                 this.playAnimation(this.IMAGES_ATTACK);
+                this.attackCharacter();
             } else if (this.position_x < 4500) {
                 this.playAnimation(this.IMAGES_ALERT);
             } else if (this.position_x > 4490) {
@@ -82,6 +84,9 @@ class Endboss extends MovableObject {
         }, 250);
     }
 
+    attackCharacter() {
+        this.position_x -= this.attackSpeed;
+    }
 
     /**
      * Mit dieser Funktion wird der Endboss bis zu einem bestimmten Punkt bewegt

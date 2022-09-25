@@ -3,6 +3,7 @@ class World {
     level = level1;
     canvas;
     ctx;
+    showDrawFrame = false;
     keyboard;
     camera_x = 0;
     statusBarHealth = new StatusBarHealth();
@@ -245,28 +246,12 @@ class World {
      */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.translate(this.camera_x, 0);
-
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.cloud);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottleGround);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBarHealth);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
+        this.addElementsToMap();
+        this.addStatusBarToMap();
         this.showYouLoseScreen();
         this.showGameOverScreen();
         this.showBossEnergy();
-        this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObjects);
-
-        this.ctx.translate(-this.camera_x, 0);
-
+        this.addCharacterAndThrowToMap();
         // Draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
@@ -276,12 +261,57 @@ class World {
 
 
     /**
+     * Mit dieser funktion werden die Objekte zu der Map hinzugefügt
+     */
+    addStatusBarToMap() {
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+    }
+
+
+    /**
+     * Mit dieser Funktion wird der Charakter und die geworfene Flasche der Map hinzugefügt
+     */
+    addCharacterAndThrowToMap() {
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObjects);
+        this.ctx.translate(-this.camera_x, 0);
+    }
+
+
+    /**
+     * Mit dieser Funktion werden die einzelnen Objekte der Map hinzugefügt
+     */
+    addElementsToMap() {
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.cloud);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottleGround);
+        this.ctx.translate(-this.camera_x, 0);
+    }
+
+
+    /**
      * Mit dieser Funktion wird die Statusbar erst ab einer bestimmten x Koordinaten angezeigt
      */
     showBossEnergy() {
-        if (this.character.position_x > 4000) {
+        if (this.isCharacterInTheAttackZone()) {
             this.addToMap(this.StatusBarEndboss);
         }
+    }
+
+
+    /**
+     * Mit dieser Funktion wird überprüft, ob die Statusbar vom Endboss angezeigt werden kann
+     * @returns die Position vom Character und isEndbossinAttackZone werden zurückgegeben
+     */
+    isCharacterInTheAttackZone() {
+        return this.character.position_x > 4000 || this.level.endboss[0].isEndbossinAttackZone;
     }
 
 
@@ -360,22 +390,29 @@ class World {
         if (movableObject.otherDirection) {
             this.flipImage(movableObject);
         }
-
         movableObject.draw(this.ctx);
-        //------show frame objects--------
-        //movableObject.drawFrameObjects(this.ctx);
-        //movableObject.drawFrameNormalChicken(this.ctx);
-        //movableObject.drawFrameSmallChicken(this.ctx);
-        //movableObject.drawFrameEndboss(this.ctx);
-        //movableObject.drawFrameCharacter(this.ctx);
-        //movableObject.drawFrameCoin(this.ctx);
-        //movableObject.drawFrameBottleGround(this.ctx);
-
+        this.showDrawFrameObjects(movableObject);
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }
     }
 
+
+    /**
+     * Mit dieser funktion werden die umrandungen von allen Objekten angezeigt
+     * @param {*} movableObject gibt die bewegten Objekte zurück
+     */
+    showDrawFrameObjects(movableObject) {
+        if (this.showDrawFrame) {
+            movableObject.drawFrameObjects(this.ctx);
+            movableObject.drawFrameNormalChicken(this.ctx);
+            movableObject.drawFrameSmallChicken(this.ctx);
+            movableObject.drawFrameEndboss(this.ctx);
+            movableObject.drawFrameCharacter(this.ctx);
+            movableObject.drawFrameCoin(this.ctx);
+            movableObject.drawFrameBottleGround(this.ctx);
+        }
+    }
 
     /**
      * Mit dieser Funktion wird das Objekt gedreht

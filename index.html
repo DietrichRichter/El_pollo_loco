@@ -37,28 +37,29 @@
 
     <div id="canvas-container" class="canvas-container">
 
-        <div>
+        <div class="canvas-container-main">
             <canvas class="d-none" id="canvas" width="720px" height="480px"></canvas>
+        </div>
 
-            <div id="touch.icons" class="touch-icons-main-container d-none">
-                <div class="touch-icon-container">
-                    <div>
-                        <img id="button-left" src="img/icons/arrow-left.png">
-                    </div>
-                    <div>
-                        <img id="button-right" src="img/icons/arrow-right.png">
-                    </div>
+        <div id="touch.icons" class="touch-icons-main-container d-none">
+            <div class="touch-icon-container">
+                <div>
+                    <img id="button-left" src="img/icons/arrow-left.png">
                 </div>
-                <div class="touch-icon-container">
-                    <div>
-                        <img id="button-up" src="img/icons/arrow-up.png">
-                    </div>
-                    <div>
-                        <img id="button-throw" src="img/6_salsa_bottle/salsa_bottle.png">
-                    </div>
+                <div>
+                    <img id="button-right" src="img/icons/arrow-right.png">
+                </div>
+            </div>
+            <div class="touch-icon-container">
+                <div>
+                    <img id="button-up" src="img/icons/arrow-up.png">
+                </div>
+                <div>
+                    <img id="button-throw" src="img/6_salsa_bottle/salsa_bottle.png">
                 </div>
             </div>
         </div>
+
 
         <div class="start-screen" id="start-screen">
             <img src="img/9_intro_outro_screens/start/startscreen_1.png">
@@ -116,7 +117,8 @@
         </div>
 
         <div id="replay-button-container" class="start-game-container d-none">
-            <button onclick="restartGame()" class="button-30" role="button">Replay</button>
+            <img onclick="restartGame()" src="img/icons/play.png">
+            Replay
         </div>
     </div>
 

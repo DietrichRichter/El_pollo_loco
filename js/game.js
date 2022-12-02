@@ -44,7 +44,7 @@ function removeIcons() {
 function addIcons() {
     document.getElementById('touch.icons').classList.remove('d-none');
     document.getElementById('canvas').classList.remove('d-none');
-    document.getElementById('sound-off').classList.remove('d-none');
+    document.getElementById('sound-on').classList.remove('d-none');
 }
 
 
@@ -145,8 +145,8 @@ window.addEventListener('keydown', (e) => {
         keyboard.DOWN = true;
         keyboard.lastMove = new Date().getTime();
     }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = true;
+    if (e.keyCode == 38) {
+        keyboard.UP = true;
         keyboard.lastMove = new Date().getTime();
     }
     if (e.keyCode == 68) {
@@ -172,8 +172,8 @@ window.addEventListener('keyup', (e) => {
         keyboard.DOWN = false;
         keyboard.lastMove = new Date().getTime();
     }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = false;
+    if (e.keyCode == 38) {
+        keyboard.UP = false;
         keyboard.lastMove = new Date().getTime();
     }
     if (e.keyCode == 68) {
@@ -207,11 +207,11 @@ function TouchButtons() {
 
     document.getElementById('button-up').addEventListener('touchstart', (event) => {
         event.preventDefault();
-        keyboard.SPACE = true;
+        keyboard.UP = true;
     });
 
     document.getElementById('button-up').addEventListener('touchend', (event) => {
-        keyboard.SPACE = false;
+        keyboard.UP = false;
     });
 
     document.getElementById('button-throw').addEventListener('touchstart', (event) => {

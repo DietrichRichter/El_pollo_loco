@@ -40,10 +40,16 @@ function initLevel() {
         ],
         [
             new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1000),
+            new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1300),
             new BottleGround('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 1500),
+            new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1800),
             new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 2000),
+            new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 2300),
             new BottleGround('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2500),
+            new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 2800),
             new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 3000),
+            new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 3300),
+            new BottleGround('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 3600),
         ],
         [
             new BackgroundObject('img/5_background/layers/air.png', -719),

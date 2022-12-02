@@ -171,7 +171,7 @@ class Character extends MovableObject {
      * @returns gibt die Position vom Character zurück
      */
     canJump() {
-        return this.world.keyboard.SPACE && !this.isAboveGround() && this.world.lastCollision < 1;
+        return this.world.keyboard.UP && !this.isAboveGround() && this.world.lastCollision < 1;
     }
 
 

@@ -22,7 +22,7 @@ class World {
     AUDIO_LOSE = new Audio('audio/lose.mp3');
     AUDIO_SOUNDTRACK = new Audio('audio/soundtrack.mp3');
     AUDIO_WIN = new Audio('audio/win.mp3');
-    soundOn = true;
+    soundOn = false;
 
 
     constructor(canvas, keyboard, intervallIds) {
